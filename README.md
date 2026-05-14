@@ -36,12 +36,8 @@ Based in **Seoul**.
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=tokyonight" alt="GitHub Stats">
 </picture>
 
-<!-- 주 사용 언어 -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=epicsagas&theme=tokyonight">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=epicsagas&theme=github">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=epicsagas&theme=tokyonight" alt="Top Languages">
-</picture>
+<!-- 주 사용 언어 (private 포함, GitHub Actions 생성) -->
+<img src="metrics-languages.svg" alt="Top Languages">
 
 <!-- 연속 기여 -->
 <picture>
