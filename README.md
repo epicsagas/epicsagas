@@ -141,8 +141,5 @@ Obsidian vault generator, automation daemon, and knowledge graph strengthener.
 [![Website](https://img.shields.io/badge/Website-epiccounty.com-C9462B?style=for-the-badge&logo=google-chrome&logoColor=white)](https://epiccounty.com)
 [![GitHub](https://img.shields.io/badge/GitHub-epicsagas-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/epicsagas)
 
-<!-- 방문자 카운터 -->
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=epicsagas&left_color=1A1B27&right_color=C9462B&left_text=Profile%20Views)
-
 <!-- 푸터 배너 -->
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=0:E8533F,50:C9462B,100:1A1B27&height=120&section=footer)
