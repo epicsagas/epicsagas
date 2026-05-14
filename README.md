@@ -31,16 +31,16 @@ Based in **Seoul**.
 ## 📊 GitHub Stats
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=epicsagas&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true&bg_color=00000000&title_color=C9462B&icon_color=E8533F">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=epicsagas&show_icons=true&theme=default&hide_border=true&include_all_commits=true">
-  <img src="https://github-readme-stats.vercel.app/api?username=epicsagas&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true" alt="GitHub Stats">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=tokyonight">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=github">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=tokyonight" alt="GitHub Stats">
 </picture>
 
 <!-- 주 사용 언어 -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=epicsagas&layout=compact&theme=tokyonight&hide_border=true&langs_count=8&bg_color=00000000&title_color=C9462B">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=epicsagas&layout=compact&theme=default&hide_border=true&langs_count=8">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=epicsagas&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" alt="Top Languages">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=epicsagas&theme=tokyonight">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=epicsagas&theme=github">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=epicsagas&theme=tokyonight" alt="Top Languages">
 </picture>
 
 <!-- 연속 기여 -->
@@ -67,54 +67,66 @@ Based in **Seoul**.
 <tr>
 <td width="50%">
 
-### alcove
+### [alcove](https://github.com/epicsagas/alcove)
 Private doc server with MCP tools — serves internal docs to AI agents without context bloat.
 
-[![alcove](https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=alcove&theme=tokyonight&hide_border=true&bg_color=00000000)](https://github.com/epicsagas/alcove)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/alcove?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/alcove)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove/releases)
 
 </td>
 <td width="50%">
 
-### epic-harness
+### [epic-harness](https://github.com/epicsagas/epic-harness)
 Central AI agent harness — 30+ commands → 6, auto-triggered skills, self-evolving from failures.
 
-[![epic-harness](https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=epic-harness&theme=tokyonight&hide_border=true&bg_color=00000000)](https://github.com/epicsagas/epic-harness)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/epic-harness?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/epic-harness)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness/releases)
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### Episteme
+### [Episteme](https://github.com/epicsagas/Episteme)
 Software engineering knowledge graph — design patterns, refactorings, laws, and code smells.
 
-[![Episteme](https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=Episteme&theme=tokyonight&hide_border=true&bg_color=00000000)](https://github.com/epicsagas/Episteme)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/Episteme?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Episteme)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/Episteme?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/Episteme)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/Episteme?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Episteme/releases)
 
 </td>
 <td width="50%">
 
-### claudy
+### [claudy](https://github.com/epicsagas/claudy)
 Multi-provider AI launcher — Anthropic, Gemini, OpenRouter, Ollama from one CLI.
 
-[![claudy](https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=claudy&theme=tokyonight&hide_border=true&bg_color=00000000)](https://github.com/epicsagas/claudy)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/claudy?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/claudy)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/claudy?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/claudy)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/claudy?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/claudy/releases)
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### llm-transpile
+### [llm-transpile](https://github.com/epicsagas/llm-transpile)
 Token-optimized document transpiler — raw docs → structured bridge format with adaptive compression.
 
-[![llm-transpile](https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=llm-transpile&theme=tokyonight&hide_border=true&bg_color=00000000)](https://github.com/epicsagas/llm-transpile)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/llm-transpile?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-transpile)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/llm-transpile?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/llm-transpile)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/llm-transpile?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-transpile/releases)
 
 </td>
 <td width="50%">
 
-### obsidian-forge
+### [obsidian-forge](https://github.com/epicsagas/obsidian-forge)
 Obsidian vault generator, automation daemon, and knowledge graph strengthener.
 
-[![obsidian-forge](https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=obsidian-forge&theme=tokyonight&hide_border=true&bg_color=00000000)](https://github.com/epicsagas/obsidian-forge)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/obsidian-forge?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/obsidian-forge)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge/releases)
 
 </td>
 </tr>
