@@ -18,7 +18,7 @@ jobs:
           GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
           python3 << 'EOF'
-          import urllib.request, urllib.parse, json, os
+          import urllib.request, json, os
 
           token = os.environ["GH_TOKEN"]
           headers = {"Authorization": f"token {token}", "Accept": "application/vnd.github+json"}
@@ -28,7 +28,6 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          # 전체 레포 목록 (fork 제외, owner 소유만)
           repos, page = [], 1
           while True:
               batch = gh(f"https://api.github.com/user/repos?per_page=100&page={page}&affiliation=owner")
@@ -39,7 +38,6 @@ jobs:
                   break
               page += 1
 
-          # 각 레포 언어 집계
           IGNORE = {"html", "css", "makefile", "dockerfile", "shell", "powershell"}
           totals = {}
           for repo in repos:
@@ -48,50 +46,51 @@ jobs:
                   if lang.lower() not in IGNORE:
                       totals[lang] = totals.get(lang, 0) + bytes_
 
-          # 상위 8개
           top = sorted(totals.items(), key=lambda x: -x[1])[:8]
           grand = sum(v for _, v in top)
 
-          # GitHub 언어 색상
           COLORS = {
               "Rust": "#dea584", "TypeScript": "#3178c6", "Go": "#00ADD8",
               "Python": "#3572A5", "Dart": "#00B4AB", "Svelte": "#ff3e00",
-              "JavaScript": "#f1e05a", "Swift": "#F05138", "Kotlin": "#A97BFF",
-              "C++": "#f34b7d", "C": "#555555", "Ruby": "#701516",
+              "JavaScript": "#f1e05a", "PHP": "#4F5D95", "Swift": "#F05138",
+              "Kotlin": "#A97BFF", "C++": "#f34b7d", "C": "#555555", "Ruby": "#701516",
           }
           DEFAULT_COLOR = "#858585"
 
-          # SVG 생성
-          W, H = 495, 195
-          BAR_Y, BAR_H = 120, 10
-          bar_x = 30
+          W, H = 340, 220
+          PAD = 25
+          FONT = "Segoe UI, Ubuntu, Helvetica Neue, sans-serif"
 
+          BAR_Y, BAR_H, BAR_W = 85, 8, W - PAD * 2
+          bar_x = PAD
           bars = []
+          for lang, bytes_ in top:
+              pct = bytes_ / grand
+              w = max(int(pct * BAR_W), 2)
+              color = COLORS.get(lang, DEFAULT_COLOR)
+              bars.append(f'<rect x="{bar_x}" y="{BAR_Y}" width="{w}" height="{BAR_H}" rx="2" fill="{color}"/>')
+              bar_x += w + 1
+
           labels = []
           for i, (lang, bytes_) in enumerate(top):
               pct = bytes_ / grand
-              w = int(pct * (W - 60))
               color = COLORS.get(lang, DEFAULT_COLOR)
-              bars.append(f'<rect x="{bar_x}" y="{BAR_Y}" width="{w}" height="{BAR_H}" rx="3" fill="{color}"/>')
-              bar_x += w + 2
-
               col = i % 2
               row = i // 2
-              lx = 30 + col * 230
-              ly = 145 + row * 22
-              pct_str = f"{pct*100:.1f}%"
+              lx = PAD + col * 155
+              ly = 116 + row * 24
               labels.append(
-                  f'<circle cx="{lx+5}" cy="{ly}" r="5" fill="{color}"/>'
-                  f'<text x="{lx+14}" y="{ly+4}" font-size="11" fill="#9f9f9f">{lang}</text>'
-                  f'<text x="{lx+140}" y="{ly+4}" font-size="11" fill="#9f9f9f" text-anchor="end">{pct_str}</text>'
+                  f'<circle cx="{lx+5}" cy="{ly}" r="4" fill="{color}"/>'
+                  f'<text x="{lx+16}" y="{ly+4}" font-size="11" fill="#a9b1d6" font-family="{FONT}">{lang}</text>'
+                  f'<text x="{lx+148}" y="{ly+4}" font-size="11" fill="#a9b1d6" font-family="{FONT}" text-anchor="end">{pct*100:.1f}%</text>'
               )
 
           svg = f"""<svg width="{W}" height="{H}" xmlns="http://www.w3.org/2000/svg">
-          <rect width="{W}" height="{H}" rx="6" fill="#1a1b27"/>
-          <text x="30" y="30" font-size="14" font-weight="600" fill="#70a5fd" font-family="Segoe UI,sans-serif">Most used languages</text>
-          <text x="30" y="50" font-size="11" fill="#9f9f9f" font-family="Segoe UI,sans-serif">private repos included · forks excluded</text>
-          {"".join(bars)}
-          {"".join(labels)}
+            <rect width="{W}" height="{H}" rx="5" fill="#1a1b27"/>
+            <text x="{PAD}" y="38" font-size="15" font-weight="600" fill="#70a5fd" font-family="{FONT}">Top Languages by Repo</text>
+            <text x="{PAD}" y="58" font-size="11" fill="#565f89" font-family="{FONT}">private repos included · forks excluded</text>
+            {"".join(bars)}
+            {"".join(labels)}
           </svg>"""
 
           with open("metrics-languages.svg", "w") as f:
