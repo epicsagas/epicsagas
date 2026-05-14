@@ -37,7 +37,8 @@ Based in **Seoul**.
 </picture>
 
 <!-- 주 사용 언어 (private 포함, GitHub Actions 생성) -->
-<img src="https://raw.githubusercontent.com/epicsagas/epicsagas/main/metrics-languages.svg" alt="Top Languages">
+
+![Top Languages](./metrics-languages.svg)
 
 <!-- 연속 기여 -->
 <picture>
