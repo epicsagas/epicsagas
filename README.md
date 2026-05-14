@@ -1,5 +1,5 @@
 <!-- 히어로 배너 -->
-![header](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,50:C9462B,100:E8533F&height=300&section=header&text=epicsagas&fontSize=80&fontColor=FFFFFF&animation=fadeIn&fontAlignY=35&desc=Software%20Engineer%20%7C%20Platform%20%26%20Infra&descSize=20&descAlignY=55)
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,50:C9462B,100:E8533F&height=300&section=header&text=epicsagas&fontSize=80&fontColor=FFFFFF&animation=fadeIn&fontAlignY=35&desc=Software%20Engineer%20%7C%20Platform%20and%20Infra&descSize=20&descAlignY=55)
 
 <!-- About Me -->
 ## 👋 About
@@ -73,6 +73,7 @@ Private doc server with MCP tools — serves internal docs to AI agents without 
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/alcove?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/alcove)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove/releases)
+[![Crates.io Downloads](https://img.shields.io/crates/d/alcove?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/alcove)
 
 </td>
 <td width="50%">
@@ -83,6 +84,7 @@ Central AI agent harness — 30+ commands → 6, auto-triggered skills, self-evo
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/epic-harness?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/epic-harness)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness/releases)
+[![Crates.io Downloads](https://img.shields.io/crates/d/epic-harness?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/epic-harness)
 
 </td>
 </tr>
@@ -95,6 +97,7 @@ Software engineering knowledge graph — design patterns, refactorings, laws, an
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/Episteme?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Episteme)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/Episteme?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/Episteme)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/Episteme?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Episteme/releases)
+[![Crates.io Downloads](https://img.shields.io/crates/d/episteme?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/episteme)
 
 </td>
 <td width="50%">
@@ -105,6 +108,7 @@ Multi-provider AI launcher — Anthropic, Gemini, OpenRouter, Ollama from one CL
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/claudy?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/claudy)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/claudy?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/claudy)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/claudy?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/claudy/releases)
+[![Crates.io Downloads](https://img.shields.io/crates/d/claudy?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/claudy)
 
 </td>
 </tr>
@@ -117,6 +121,7 @@ Token-optimized document transpiler — raw docs → structured bridge format wi
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/llm-transpile?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-transpile)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/llm-transpile?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/llm-transpile)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/llm-transpile?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-transpile/releases)
+[![Crates.io Downloads](https://img.shields.io/crates/d/llm-transpile?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/llm-transpile)
 
 </td>
 <td width="50%">
@@ -127,6 +132,7 @@ Obsidian vault generator, automation daemon, and knowledge graph strengthener.
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/obsidian-forge?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/obsidian-forge)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge/releases)
+[![Crates.io Downloads](https://img.shields.io/crates/d/obsidian-forge?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/obsidian-forge)
 
 </td>
 </tr>
