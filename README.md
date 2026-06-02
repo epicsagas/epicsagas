@@ -51,7 +51,7 @@ Based in **Seoul**.
 <!-- 트로피 -->
 ## 🏆 Achievements
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=epicsagas&theme=onedark&row=1&column=7&no-bg=true&no-frame=true&margin-w=8)](https://github.com/ryo-ma/github-profile-trophy)
+[![trophy](https://github-trophies.vercel.app/?username=epicsagas&theme=onedark&row=1&column=7&no-bg=true&no-frame=true&margin-w=8)](https://github.com/ryo-ma/github-profile-trophy)
 
 <!-- 활동 그래프 -->
 ## 📈 Activity
