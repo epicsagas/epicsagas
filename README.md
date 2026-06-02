@@ -21,6 +21,7 @@ Based in **Seoul**.
 - 🔄 **claudy** — Multi-provider AI launcher (Anthropic, Gemini, OpenRouter, Ollama)
 - 📄 **llm-transpile** — Token-optimized document transpiler
 - 🏠 **obsidian-forge** — Obsidian vault automation and graph strengthener
+- 📖 **Velith** — AI-native book publishing plugin (Claude Code + Codex CLI)
 
 <!-- 기술 스택 -->
 ## 🛠 Tech Stack
@@ -130,6 +131,16 @@ Obsidian vault generator, automation daemon, and knowledge graph strengthener.
 [![GitHub Stars](https://img.shields.io/github/stars/epicsagas/obsidian-forge?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge)
 [![Language](https://img.shields.io/github/languages/top/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/obsidian-forge)
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge/releases)
+
+</td>
+<td width="50%">
+
+### [Velith](https://github.com/epicsagas/Velith)
+AI-native book publishing plugin — 6-phase pipeline from ideation to EPUB/PDF, for Claude Code and Codex CLI.
+
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/Velith?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/Velith)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith/releases)
 
 </td>
 </tr>
