@@ -133,6 +133,8 @@ Obsidian vault generator, automation daemon, and knowledge graph strengthener.
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge/releases)
 
 </td>
+</tr>
+<tr>
 <td width="50%">
 
 ### [Velith](https://github.com/epicsagas/Velith)
@@ -143,6 +145,7 @@ AI-native book publishing plugin — 6-phase pipeline from ideation to EPUB/PDF,
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith/releases)
 
 </td>
+<td width="50%"></td>
 </tr>
 </table>
 
