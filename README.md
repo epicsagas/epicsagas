@@ -21,7 +21,7 @@ Based in **Seoul**.
 - 🔄 **claudy** — Multi-provider AI launcher (Anthropic, Gemini, OpenRouter, Ollama)
 - 📄 **llm-transpile** — Token-optimized document transpiler
 - 🏠 **obsidian-forge** — Obsidian vault automation and graph strengthener
-- 📖 **Velith** — AI-native book publishing plugin (Claude Code + Codex CLI)
+- 📖 **Velith** — AI-native book publishing plugin with Claude Code, Codex, Antigravity, etc
 
 <!-- 기술 스택 -->
 ## 🛠 Tech Stack
