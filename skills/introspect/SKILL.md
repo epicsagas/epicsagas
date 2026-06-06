@@ -1,6 +1,6 @@
 ---
-name: cognitive-audit
-description: Cold analysis of user's thinking patterns from conversation history — cognitive biases, logical blind spots, decision-making style, repetitive patterns. Triggers on: 'cognitive audit', 'analyze my thinking', 'thinking patterns', 'my biases', 'self-analysis'. No praise — only evidence-based critique with actionable routines.
+name: introspect
+description: Cold analysis of user's thinking patterns from conversation history — cognitive biases, logical blind spots, decision-making style, repetitive patterns. Triggers on: 'introspect', 'analyze my thinking', 'thinking patterns', 'my biases', 'self-analysis'. No praise — only evidence-based critique with actionable routines.
 ---
 
 # Cognitive Audit
