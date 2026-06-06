@@ -132,6 +132,7 @@ Each routine must:
 - Be **executable in ≤15 minutes**
 - Have a **clear success criterion** (not subjective)
 - Be **frequency-specified** (daily/weekly/per-incident)
+- **Reference the corresponding corrective skill** when one exists (see mapping table below)
 
 Format for each routine:
 
@@ -141,11 +142,62 @@ Format for each routine:
 - **Action**: [concrete behavior, 1-3 steps]
 - **Frequency**: [daily / weekly / per-incident]
 - **Success criterion**: [objective, measurable criterion]
+- **Skill**: /{skill-name} — [when to invoke]
 ```
+
+#### Bias-to-Skill Mapping
+
+Use this table to link identified biases to corrective skills:
+
+| Identified Bias / Pattern | Corrective Skill | When to Invoke |
+|---------------------------|-----------------|----------------|
+| Complexity bias, over-engineering | `/mvp-force` | Before starting any new project |
+| Tool/infrastructure hoarding | `/system-diet` | Quarterly, or when adding a new tool |
+| Surface-level justification | `/five-whys` | Before committing to any technical decision |
+| No business justification | `/biz-risk` | Before writing code for a new feature |
+| Overconfidence in technical judgment | `/devils-advocate` | When feeling certain about a direction |
+| Perfectionism, "not ready yet" | `/ship-over-perfect` | Monthly, or when resisting release |
+| Self-referential complexity | `/non-tech-feedback` | Weekly, or before any external demo |
+| Domain myopia | `/asymmetric-learning` | Weekly |
+| Hidden debt accumulation | `/tech-debt-scan` | Monthly, or when "fix it later" appears |
+| "Works on my machine" | `/env-test` | Before any release or sharing |
+| Scope creep | `/mvp-force` | When feature list grows past initial plan |
+| Sunk cost on failing approach | `/devils-advocate` | When defending continued investment |
+
+Not every routine must map to a skill. If the identified bias doesn't match any skill, generate a manual routine as before.
 
 ### 6. Overall Assessment
 
 One paragraph. Cold. No hedging. Direct statement of the user's most impactful thinking pattern — the one that, if corrected, would yield the highest ROI.
+
+---
+
+### Step 5: Transition to action
+
+After delivering the report, present a summary of mapped skills:
+
+```markdown
+## Recommended Skills Based on Your Patterns
+
+Based on the biases identified above, these corrective skills are available:
+
+| Priority | Skill | Corrects | Trigger |
+|----------|-------|----------|---------|
+| 🔴 High | /{skill} | {bias from report} | {when to use} |
+| 🔴 High | /{skill} | {bias from report} | {when to use} |
+| 🟡 Medium | /{skill} | {bias from report} | {when to use} |
+| 🟢 Low | /{skill} | {bias from report} | {when to use} |
+```
+
+Ask the user:
+
+> "Which of these would you like to run now? Select by number, or type 'all' to run the high-priority ones sequentially."
+
+**If user selects one or more**: Execute the selected skills in priority order (🔴 → 🟡 → 🟢). Each skill runs as a follow-up interaction — the user does NOT need to re-invoke them manually.
+
+**If user selects 'all'**: Run all 🔴 High-priority skills sequentially, then offer 🟡 Medium.
+
+**If user declines**: Save the report. The skill references remain in the report for future use.
 
 ---
 
@@ -157,6 +209,9 @@ One paragraph. Cold. No hedging. Direct statement of the user's most impactful t
 - Name biases by their recognized names
 - Provide counter-examples when the user breaks their own pattern (this reveals what triggers the exception)
 - Link each routine to a specific finding — no orphan recommendations
+- Map every identified bias to a corrective skill where one exists
+- Offer to execute the mapped skills after delivering the report
+- Prioritize skills by the severity of the bias they correct
 
 ### Do Not
 - Use any form of praise, encouragement, or softening language

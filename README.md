@@ -16,6 +16,31 @@ Based in **Seoul**.
 
 Personal agent skill collection for AI coding agents — [skills/README.md](skills/README.md)
 
+### Core Skills
+
+| Skill | Description |
+|-------|-------------|
+| **discover** | Problem discovery — reframes vague ideas into structured problem definitions |
+| **introspect** | Cognitive audit — evidence-based analysis of thinking patterns and biases |
+| **oss-dist** | OSS readiness — release readiness across community, docs, distribution, security |
+
+### Corrective Routines
+
+Born from `introspect` — individual skills targeting specific cognitive biases.
+
+| Skill | Corrects |
+|-------|----------|
+| **five-whys** | Surface-level justification — 5-level root-cause drill |
+| **biz-risk** | Building without business case — impact quantification before code |
+| **devils-advocate** | Overconfidence — 3-angle adversarial counter-argument |
+| **mvp-force** | Over-engineering — 3-day MVP scope enforcement |
+| **system-diet** | Tool hoarding — forced 20% removal quarterly |
+| **ship-over-perfect** | Perfectionism — mandatory monthly external release |
+| **non-tech-feedback** | Self-referential complexity — non-technical audience comprehension test |
+| **asymmetric-learning** | Domain myopia — weekly cross-domain book learning |
+| **tech-debt-scan** | Hidden debt — codebase debt inventory with risk scoring |
+| **env-test** | "Works on my machine" — cross-environment compatibility validation |
+
 <!-- 현재 작업 중인 것 -->
 ## 🚀 What I'm Building
 
@@ -152,10 +177,6 @@ AI-native book publishing plugin — 6-phase pipeline from ideation to EPUB/PDF,
 <td width="50%"></td>
 </tr>
 </table>
-
-## 🧩 Agent Skills
-
-Personal agent skill collection for AI coding agents — [skills/README.md](skills/README.md)
 
 <!-- 연락처 / 링크 -->
 ## 🔗 Links
