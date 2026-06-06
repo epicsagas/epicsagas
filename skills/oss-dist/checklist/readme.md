@@ -244,13 +244,6 @@ Skip if: <100 stars, no notable adopters, no concrete testimonials.
 
 ### 8. Badges (4–6 max)
 
-```markdown
-[![CI](https://github.com/user/repo/actions/workflows/ci.yml/badge.svg)](link)
-[![Version](https://img.shields.io/crates/v/project)](link)
-[![License](https://img.shields.io/badge/license-MIT-blue)](link)
-[![Downloads](https://img.shields.io/crates/d/project)](link)
-```
-
 Order: CI status → version → license → downloads
 
 Allowed:
@@ -265,6 +258,44 @@ Forbidden:
 - devDependencies status
 - Unused platform badges
 - Vanity badges with no meaning
+
+#### Badge Design Style
+
+Use `style=for-the-badge` with `labelColor=0d1117` (dark background) and `logoColor=white`.
+Assign a distinct semantic color to each badge type — do not use shields.io defaults.
+
+| Badge type | `color` | Notes |
+|------------|---------|-------|
+| CI / build | `58a6ff` | blue — neutral status |
+| Version | `fc8d62` | orange — maps to crates.io / npm branding |
+| License | `3fb950` | green — safe/permissive signal |
+| Downloads | `3498db` | blue — usage/volume |
+| Stars | `ffd700` | gold — community |
+| Issues | `ff6b6b` | red — attention |
+
+**Row 1 — activity stats** (stars, forks, issues, last-commit):
+
+```html
+<p align="center">
+  <a href="https://github.com/user/repo/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/user/repo?style=for-the-badge&labelColor=0d1117&color=ffd700&logo=github&logoColor=white" /></a>
+  <a href="https://github.com/user/repo/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/user/repo?style=for-the-badge&labelColor=0d1117&color=2ecc71&logo=github&logoColor=white" /></a>
+  <a href="https://github.com/user/repo/issues"><img alt="Issues" src="https://img.shields.io/github/issues/user/repo?style=for-the-badge&labelColor=0d1117&color=ff6b6b&logo=github&logoColor=white" /></a>
+  <a href="https://github.com/user/repo/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/user/repo?style=for-the-badge&labelColor=0d1117&color=58a6ff&logo=git&logoColor=white" /></a>
+</p>
+```
+
+**Row 2 — release metadata** (version, downloads, license):
+
+```html
+<p align="center">
+  <a href="https://crates.io/crates/project"><img alt="Crates.io" src="https://img.shields.io/crates/v/project?style=for-the-badge&labelColor=0d1117&color=fc8d62&logo=rust&logoColor=white" /></a>
+  <a href="https://crates.io/crates/project"><img alt="Downloads" src="https://img.shields.io/crates/d/project?style=for-the-badge&labelColor=0d1117&color=3498db&logo=rust&logoColor=white" /></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-3fb950?style=for-the-badge&labelColor=0d1117" /></a>
+</p>
+```
+
+For npm: swap `logo=rust` → `logo=npm`, `color=fc8d62` → `color=cb3837`.
+For PyPI: swap `logo=rust` → `logo=python`, `color=fc8d62` → `color=3776ab`.
 
 ---
 
