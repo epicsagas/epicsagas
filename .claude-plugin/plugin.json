@@ -1,0 +1,19 @@
+{
+  "name": "epicsagas",
+  "version": "0.1.0",
+  "description": "Personal skill collection — problem discovery, cognitive audit, OSS distribution readiness.",
+  "author": {
+    "name": "epicsagas",
+    "url": "https://github.com/epicsagas"
+  },
+  "homepage": "https://github.com/epicsagas/epicsagas",
+  "repository": "https://github.com/epicsagas/epicsagas",
+  "license": "Apache-2.0",
+  "keywords": [
+    "skills",
+    "problem-discovery",
+    "cognitive-audit",
+    "oss"
+  ],
+  "skills": "./skills/"
+}

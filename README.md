@@ -12,6 +12,10 @@ Commerce · Regulated Fintech · Crypto · Security on AWS/GCP
 
 Based in **Seoul**.
 
+## 🧩 Agent Skills
+
+Personal agent skill collection for AI coding agents — [skills/README.md](skills/README.md)
+
 <!-- 현재 작업 중인 것 -->
 ## 🚀 What I'm Building
 
@@ -148,6 +152,10 @@ AI-native book publishing plugin — 6-phase pipeline from ideation to EPUB/PDF,
 <td width="50%"></td>
 </tr>
 </table>
+
+## 🧩 Agent Skills
+
+Personal agent skill collection for AI coding agents — [skills/README.md](skills/README.md)
 
 <!-- 연락처 / 링크 -->
 ## 🔗 Links
