@@ -51,6 +51,7 @@ Born from `introspect` — individual skills targeting specific cognitive biases
 - 📄 **llm-transpile** — Token-optimized document transpiler
 - 🏠 **obsidian-forge** — Obsidian vault automation and graph strengthener
 - 📖 **Velith** — AI-native book publishing plugin with Claude Code, Codex, Antigravity, etc
+- ⚙️ **llm-kernel** — Foundation library for Rust AI-native apps (LLM client, MCP, embeddings, search)
 
 <!-- 기술 스택 -->
 ## 🛠 Tech Stack
@@ -174,7 +175,17 @@ AI-native book publishing plugin — 6-phase pipeline from ideation to EPUB/PDF,
 [![Latest Release](https://img.shields.io/github/v/release/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith/releases)
 
 </td>
-<td width="50%"></td>
+<td width="50%">
+
+### [llm-kernel](https://github.com/epicsagas/llm-kernel)
+Foundation library for Rust AI-native apps — provider catalog, LLM client, MCP server, search, telemetry, and safety.
+
+[![Crates.io Downloads](https://img.shields.io/crates/d/llm-kernel?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/llm-kernel)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/llm-kernel?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-kernel)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/llm-kernel?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/llm-kernel)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/llm-kernel?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-kernel/releases)
+
+</td>
 </tr>
 </table>
 
