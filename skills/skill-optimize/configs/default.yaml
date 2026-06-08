@@ -54,4 +54,4 @@ env:
   workers: 4
   exec_timeout: 120
   max_completion_tokens: 4096
-  out_root: ".skillopt/outputs"
+  out_root: ""                              # set to TARGET_DIR/.skillopt/outputs at runtime

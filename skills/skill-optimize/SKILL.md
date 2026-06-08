@@ -11,10 +11,11 @@ Use SkillOpt to automatically improve agent skill documents through trajectory-d
 
 ```
 SKILL_DIR  = {this skill-optimize directory}
-WORK_DIR   = SKILL_DIR/.skillopt        # training data persists here
+TARGET_DIR = {target skill directory}    # e.g. ~/.claude/skills/sqlx
+WORK_DIR   = TARGET_DIR/.skillopt       # training data persists at target
 ```
 
-All paths below use `SKILL_DIR` — resolve it at runtime by locating this `SKILL.md` file and computing `dirname(SKILL.md)/..`.
+All training outputs live under `TARGET_DIR/.skillopt/` — the target skill's own directory, **not** skill-optimize's directory. Different skills → different data locations.
 
 `.skillopt/` stores training outputs, data splits, and run history. **Never delete `.skillopt/`** — it contains the audit trail and enables resume.
 
@@ -65,24 +66,28 @@ Validation criteria:
 Use `scripts/build_env_split.py` — override `collect_tasks()` and `build_items()` for your environment.
 
 ```bash
-SPLIT_DIR=data/{env}_split python scripts/build_env_split.py
+SPLIT_DIR=TARGET_DIR/.skillopt/envs/{env}/data/split python scripts/build_env_split.py
 ```
 
 ### Step 3: Build environment adapter
 
 Use `templates/adapter.py` — copy to your project, implement `rollout()` and evaluator.
 
-Required adapter structure:
+Required adapter structure (all under `TARGET_DIR/.skillopt/`):
 ```
-{your_project}/
-├── adapter.py      # from template
-├── dataloader.py   # SplitDataLoader subclass
-├── rollout.py      # rollout logic (ThreadPoolExecutor)
-├── evaluator.py    # response scoring (em, f1)
-├── skills/
-│   └── initial.md  # seed skill (copy of current)
-└── prompts/
-    └── rollout_system.md
+TARGET_DIR/.skillopt/
+├── envs/{env_name}/
+│   ├── adapter.py      # from template
+│   ├── dataloader.py   # SplitDataLoader subclass
+│   ├── rollout.py      # rollout logic (ThreadPoolExecutor)
+│   ├── evaluator.py    # response scoring (em, f1)
+│   ├── data/
+│   │   └── split/      # train.json, val.json, test.json
+│   ├── skills/
+│   │   └── initial.md  # seed skill (copy of current)
+│   └── prompts/
+│       └── rollout_system.md
+└── outputs/            # training results
 ```
 
 Key methods to implement (from `EnvAdapter` ABC):
@@ -102,7 +107,7 @@ python scripts/train.py --config configs/{env_name}/default.yaml
 
 Training loop: Rollout → Reflect → Aggregate → Select (gate) → Update (bounded edit)
 
-Output: `.skillopt/outputs/{env_name}_{model}_{timestamp}/best_skill.md`
+Output: `TARGET_DIR/.skillopt/outputs/{env_name}_{model}_{timestamp}/best_skill.md`
 
 ### Step 6: Evaluate and apply
 
