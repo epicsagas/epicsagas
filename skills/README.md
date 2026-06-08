@@ -29,6 +29,12 @@ Born from `introspect` analysis — individual skills targeting specific cogniti
 | **tech-debt-scan** | Codebase debt inventory with risk scoring | Hidden debt compounding, "fix it later" pattern | "tech debt", "TODO scan", "debt audit" |
 | **env-test** | Cross-environment compatibility validation | "Works on my machine" syndrome | "env test", "compatibility", "works elsewhere" |
 
+### Experimental
+
+| Skill | Description | Triggers |
+|-------|-------------|----------|
+| **skill-optimize** | SkillOpt pipeline — optimizes skill documents through trajectory-driven edits, validation-gated updates | "optimize skill", "SkillOpt", "skill training", "improve this skill" |
+
 ## Install
 
 ```bash

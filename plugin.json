@@ -13,7 +13,8 @@
     "skills",
     "problem-discovery",
     "cognitive-audit",
-    "oss"
+    "oss",
+    "skill-optimization"
   ],
   "skills": "./skills/"
 }
