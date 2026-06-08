@@ -1,2 +1,3 @@
-# SkillOpt engine (installed per-user via scripts/install.sh)
-.skillopt/
+# Python
+__pycache__/
+*.pyc

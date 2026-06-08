@@ -11,10 +11,9 @@ Use SkillOpt to automatically improve agent skill documents through trajectory-d
 
 ```
 SKILL_DIR = {this skill-optimize directory}
-SKILLOPT_DIR = SKILL_DIR/.skillopt     # cloned SkillOpt engine
 ```
 
-All paths below use `SKILLOPT_DIR` — resolve it at runtime by locating this `SKILL.md` file and computing `dirname(SKILL.md)/../.skillopt`.
+All paths below use `SKILL_DIR` — resolve it at runtime by locating this `SKILL.md` file and computing `dirname(SKILL.md)/..`.
 
 ## When to Trigger
 
@@ -33,17 +32,11 @@ All paths below use `SKILLOPT_DIR` — resolve it at runtime by locating this `S
 ## Prerequisites
 
 ```bash
-# Resolve SKILLOPT_DIR (example — adapt to actual skill location)
-SKILLOPT_DIR="$(dirname "$(find . -path '*/skill-optimize/SKILL.md' -print -quit)")/.skillopt"
-
-# Install if missing
-if [ ! -d "$SKILLOPT_DIR/.git" ]; then
-    bash "$(dirname "$(find . -path '*/skill-optimize/SKILL.md' -print -quit)")/scripts/install.sh"
-fi
+# Install SkillOpt (pip)
+pip install skillopt
 
 # Verify
-test -d "$SKILLOPT_DIR" || echo "Run install.sh first"
-test -f "$SKILLOPT_DIR/.venv/bin/activate" || echo "Run install.sh first"
+python -c "import skillopt; print('ok')"
 claude auth status 2>/dev/null || echo "Run claude auth login"
 ```
 
@@ -69,18 +62,16 @@ Validation criteria:
 Use `scripts/build_env_split.py` — override `collect_tasks()` and `build_items()` for your environment.
 
 ```bash
-cd "$SKILLOPT_DIR" && source .venv/bin/activate
 SPLIT_DIR=data/{env}_split python scripts/build_env_split.py
 ```
 
 ### Step 3: Build environment adapter
 
-Use `templates/adapter.py` — copy to `skillopt/envs/{env_name}/adapter.py`, implement `rollout()` and evaluator.
+Use `templates/adapter.py` — copy to your project, implement `rollout()` and evaluator.
 
 Required adapter structure:
 ```
-skillopt/envs/{env_name}/
-├── __init__.py
+{your_project}/
 ├── adapter.py      # from template
 ├── dataloader.py   # SplitDataLoader subclass
 ├── rollout.py      # rollout logic (ThreadPoolExecutor)
@@ -96,20 +87,13 @@ Key methods to implement (from `EnvAdapter` ABC):
 - `reflect(results, skill_content, out_dir)` — generate edit suggestions (default: `run_minibatch_reflect`)
 - `get_task_types()` — return list of task type strings
 
-### Step 4: Register adapter + config
+### Step 4: Configure
 
-1. Add to `scripts/train.py` `_register_builtins()`:
-   ```python
-   from skillopt.envs.{env_name}.adapter import {EnvName}Adapter
-   _ENV_REGISTRY["{env_name}"] = {EnvName}Adapter
-   ```
-
-2. Copy `configs/default.yaml` → `configs/{env_name}/default.yaml`, fill env-specific fields.
+Copy `configs/default.yaml` → `configs/{env_name}/default.yaml`, fill env-specific fields.
 
 ### Step 5: Run training
 
 ```bash
-cd "$SKILLOPT_DIR" && source .venv/bin/activate
 python scripts/train.py --config configs/{env_name}/default.yaml
 ```
 
