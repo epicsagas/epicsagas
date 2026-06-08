@@ -44,6 +44,11 @@ Ask (or infer from context) what the user needs:
 | Tool comparison (mise, uv, etc.) | `tools/<tool>.md` |
 | **epicsagas project install standard validation** | `install-best-practices.md` |
 | "write install section" / "one-line install" / "unify install section" | `install-best-practices.md` + `languages/rust.md` §R.2 |
+| "badge style", "배지 스타일", `--badge <preset>` | `checklist/readme.md § Badge Design Style` |
+| "update", "upgrade", "self-update", "updating section" | `checklist/update.md` |
+| "pre-release", "beta", "alpha", "rc", "nightly", "--pre" | `checklist/prerelease.md` |
+| "docker", "container", "ghcr", "image", "multi-arch" | `checklist/docker.md` |
+| "CVE", "security advisory", "patch release", "vulnerability response" | `checklist/cve-response.md` |
 
 **Load only what's needed. Do not load all files at once.**
 
@@ -60,6 +65,10 @@ Checklist files are under `checklist/`:
 | `checklist/update.md` | Update/upgrade commands, package manager detection, self-update |
 | `checklist/governance.md` | Security policy, SBOM, secret scanning, governance model |
 | `checklist/i18n.md` | README multilingual strategy, software i18n/l10n, translation tooling |
+| `checklist/update.md` | Update/upgrade commands per install method, Updating README section template |
+| `checklist/prerelease.md` | Beta/alpha/rc/nightly channels, pre-release config, graduation criteria |
+| `checklist/docker.md` | Docker image distribution, GHCR, multi-arch builds |
+| `checklist/cve-response.md` | CVE triage, patch release SLA, security advisory, disclosure |
 | **`install-best-practices.md`** | **epicsagas project standard install block, curl flags, Homebrew notation, Updating table order** |
 
 ### Step 3: Audit against the checklist
@@ -154,8 +163,99 @@ Never answer from memory. Always load the relevant checklist file(s) first, then
 4. Verify version check command (`--version`), CHANGELOG format, and migration guide exist
 5. If missing, generate the correct update section using the template from §6.6
 
+### Badge Style Selection
+
+When generating or polishing badges (README generate/polish scope):
+
+**If the user passes a style option explicitly** — use it directly:
+
+| Option | Preset |
+|--------|--------|
+| `--badge bold` | `for-the-badge` + `labelColor=0d1117` (default) |
+| `--badge classic` | `flat`, no labelColor |
+| `--badge modern` | `flat-square`, no labelColor |
+| `--badge social` | `social`, no labelColor |
+| `--badge plastic` | `plastic`, no labelColor |
+
+**If no style option is given** — ask interactively before generating badges:
+
+```
+배지 스타일을 선택해주세요:
+
+1. bold (기본값) — for-the-badge, 다크 배경 — epicsagas 표준 스타일
+2. classic       — flat, GitHub 기본 느낌
+3. modern        — flat-square, 미니멀
+4. social        — social, 커뮤니티 스타 카운트용
+5. plastic       — plastic, 클래식 입체감
+
+선택하지 않으면 bold(1)로 진행합니다.
+```
+
+Once a style is selected (or defaulted), apply the corresponding template from `checklist/readme.md § Badge Design Style`.
+
+### README Language Selection
+
+When generating a new README (GENERATE mode):
+
+**If the user passes a language option explicitly:**
+| Option | Coverage |
+|--------|----------|
+| `--lang en` | English only (default) |
+| `--lang en,ko` | English + Korean |
+| `--lang en,ko,ja,zh` | Full multilingual (i18n checklist applies) |
+
+**If no language option is given — ask interactively:**
+
+```
+README 언어 전략을 선택해주세요:
+
+1. 영어만 (기본값) — 글로벌 OSS 표준
+2. 영어 + 한국어  — epicsagas 권장 (Korean dev community 타겟)
+3. 영어 + 한+일+중 — 전체 다국어 (i18n 체크리스트 적용)
+
+선택하지 않으면 영어만(1)으로 진행합니다.
+```
+
+For options 2–3, load `checklist/i18n.md` and apply the multilingual README structure.
+
+### License Selection
+
+When generating community files or README and no LICENSE exists:
+
+**If the user specifies a license — use it directly.**
+
+**If no license specified — ask interactively:**
+
+```
+라이선스를 선택해주세요:
+
+1. Apache-2.0 (기본값) — epicsagas 표준, 특허 조항 포함
+2. MIT           — 최소 제약, 최대 호환성
+3. GPL-3.0       — Copyleft, 파생물 공개 강제
+4. BSL-1.1       — Business Source License (상용 제한)
+
+선택하지 않으면 Apache-2.0(1)으로 진행합니다.
+```
+
+### Answering "pre-release / beta / nightly"
+1. Load `checklist/prerelease.md`
+2. Identify the project language — check for cargo-dist or goreleaser config
+3. Give concrete tag pattern and config snippet
+
+### Answering "Docker / container image"
+1. Load `checklist/docker.md`
+2. Default registry: GHCR for epicsagas projects
+3. Give the complete GitHub Actions workflow for multi-arch build
+
+### Answering "CVE / security vulnerability"
+1. Load `checklist/cve-response.md`
+2. Assess severity tier — give SLA deadline
+3. Walk through patch release + advisory steps in order
+
 ### Do not
 
 - Do not load all sub-files unless the user requests a full audit
 - Do not recommend channels before checking community file completeness
 - Do not give generic "write a good README" advice — cite specific checklist items
+- Do not generate badges without resolving the style (option or interactive prompt)
+- Do not generate badges, README language selection, or license without resolving the style/choice (option or interactive prompt)

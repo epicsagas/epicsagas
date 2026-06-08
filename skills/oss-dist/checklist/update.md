@@ -1,174 +1,128 @@
-# Update Readiness — Audit Checklist (§6)
+---
+name: update
+description: Update/upgrade readiness checklist for OSS projects. Covers per-install-method update commands, version check format, CHANGELOG requirements, migration guides, and a ready-to-paste README Updating section template for epicsagas projects.
+tags: [layer/raw, project-guidelines]
+project: projects
+created: 2026-06-08
+---
 
-> Audits whether the project provides proper update/upgrade guidance for all supported install methods.
-> Complements `checklist/release.md` (install) — this covers the upgrade lifecycle.
+# Update & Upgrade Readiness — Checklist (§6)
+
+> §6 of OSS-PROJECT-GUIDELINES. Referenced by `../SKILL.md` (Targeted Lookup, keyword: `update, upgrade, self-update`).
+> For epicsagas install standard, see `../install-best-practices.md`.
 
 ---
 
-## §6.1 README Update Section
+## §6.1 Update Readiness Audit
 
-- [ ] README has a dedicated "Updating" or "Upgrade" section (separate from "Installation")
-- [ ] Every install method listed in "Installation" has a corresponding update command
-- [ ] Update commands are exact copy-paste ready (not vague descriptions)
+For every install method documented in the README **Installation** section, a corresponding update path must exist — explicit or inline.
 
-**Common mistake:** README lists 5 install methods but only shows `brew upgrade`.
+- [ ] List every install method currently in README (Homebrew, curl, cargo install, binstall, winget, scoop, mise, etc.)
+- [ ] Confirm each has a documented update command or inline hint
+- [ ] No install method is documented without a working, tested update path
+- [ ] Update commands verified against actual released version (no placeholders)
+- [ ] `--version` output tested after update to confirm version bumped
+- [ ] If a built-in updater exists (`<tool> update / upgrade / self-update`), it is listed first
+
+**Decision rule:** If all update paths are obvious (Homebrew, binstall, cargo install), a single inline hint suffices. Only add a full `## Updating` table when at least one path is non-obvious (curl installer, plugin-based install, built-in updater).
 
 ---
 
-## §6.2 Update Commands by Install Method
+## §6.2 Per-Install-Method Update Commands
 
-For each install method the project supports, verify the correct update command is documented:
+| Install Method | Update Command | Notes |
+|----------------|---------------|-------|
+| Homebrew | `brew upgrade <tool>` | Picks up new tap formula automatically |
+| curl installer (macOS/Linux) | Re-run original `curl … \| sh` command | No state left; re-runs are idempotent |
+| PowerShell installer (Windows) | Re-run original `irm … \| iex` command | Same as curl; overwrites binary in place |
+| `cargo install` | `cargo install <tool>` | Rebuilds from latest crates.io version |
+| `cargo binstall` | `cargo binstall <tool>@latest` | Downloads pre-built; faster than rebuild |
+| winget | `winget upgrade <tool>` | Requires winget manifest on winget-pkgs |
+| scoop | `scoop update <tool>` | Requires bucket manifest to be updated |
+| mise | `mise upgrade <tool>` | Requires backend registry entry |
 
-| Install Method | Expected Update Command | Notes |
-|---|---|---|
-| Homebrew (`brew install`) | `brew upgrade tool` | |
-| cargo (`cargo install`) | `cargo install tool@latest` | Recompiles from source |
-| cargo-binstall | `cargo binstall tool@latest` | Binary, fast |
-| npm global | `npm update -g tool` | |
-| pnpm global | `pnpm update -g tool` | |
-| yarn global | `yarn global upgrade tool` | |
-| bun global | `bun update -g tool` | |
-| pipx | `pipx upgrade tool` | |
-| pip | `pip install --upgrade tool` | |
-| uv tool | `uv tool upgrade tool` | |
-| go install | `go install github.com/user/tool@latest` | Always pulls latest |
-| scoop | `scoop update tool` | |
-| winget | `winget upgrade --id Publisher.ToolName` | |
-| choco | `choco upgrade tool` | |
-| apt repo | `sudo apt update && sudo apt install --only-upgrade tool` | |
-| dnf repo | `sudo dnf upgrade tool` | |
-| pacman / AUR | `sudo pacman -Syu tool` or `yay -Syu tool` | |
-| snap | `sudo snap refresh tool` | Auto-update by default |
-| flatpak | `flatpak update com.example.Tool` | |
-| mint | `mint install user/tool@latest` | Overwrites previous |
-| mise | `mise upgrade tool` | |
-| curl \| sh (static binary) | Re-run the same installer script | cargo-dist / goreleaser generated |
-| PowerShell `irm \| iex` | Re-run the same installer script | |
+**epicsagas projects** — canonical update path priority (from `install-best-practices.md`):
+1. `brew upgrade epicsagas/tap/<tool>`
+2. Re-run curl / PowerShell installer
+3. `cargo binstall <tool>@latest`
+4. `cargo install <tool>` (source rebuild, slowest)
 
-### Audit check
+---
 
+## §6.3 Version Check Verification
+
+- [ ] `<tool> --version` exits 0
+- [ ] Output format is exactly: `<tool> <semver>` on the first line (e.g., `alcove 0.4.1`)
+- [ ] No extra noise before the version string (debug output, warnings, update nags)
+- [ ] Version string matches the tag pushed to GitHub (strip leading `v` if present in output)
+- [ ] CI smoke test runs `<tool> --version` after install step and asserts exit code 0
+- [ ] If a built-in updater exists, `<tool> --version` after `<tool> self-update` reflects new version
+
+**Canonical output contract:**
 ```
-For each install method in README "Installation" section:
-  → Is there a matching update command in "Updating" section?
-  → Is the command correct for that package manager?
-  → Is it copy-paste ready?
+<tool> <major>.<minor>.<patch>
 ```
 
 ---
 
-## §6.3 Version Verification
+## §6.4 CHANGELOG Format Requirements
 
-- [ ] `--version` / `-V` / `version` subcommand works
-- [ ] Version check command documented in README (e.g., `tool --version`)
-- [ ] Version output includes semver (`X.Y.Z`) — not just commit hash
+Follow [Keep a Changelog](https://keepachangelog.com) + [Semantic Versioning](https://semver.org).
 
----
-
-## §6.4 Breaking Changes & Migration
-
-- [ ] CHANGELOG follows [Keep a Changelog](https://keepachangelog.com) format
-- [ ] Major version bumps include migration guide
-- [ ] Breaking changes are called out in GitHub Release notes
-- [ ] Deprecation notices appear at least 1 minor version before removal
-
----
-
-## §6.5 Self-Updating Support
-
-If the tool supports in-place self-update, document it:
-
-| Mechanism | Example | Audit |
-|---|---|---|
-| Built-in self-update | `tool self update` or `tool update` | [ ] Documented in README |
-| Auto-update check | Deno: auto-checks on first run | [ ] Documented, with opt-out flag |
-| Package manager auto | snap: auto-updates by default | [ ] Noted in README if applicable |
+- [ ] File is named `CHANGELOG.md` at repo root
+- [ ] Latest release is at the top; oldest at the bottom
+- [ ] Each version block: `## [<semver>] - YYYY-MM-DD`
+- [ ] `[Unreleased]` section exists above latest release (updated continuously)
+- [ ] Sections used only when non-empty: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`
+- [ ] Breaking changes appear under `Changed` with a `**BREAKING:**` prefix
+- [ ] Every entry is user-facing language, not commit messages
+- [ ] Diff links at the bottom: `[0.4.1]: https://github.com/…/compare/v0.4.0…v0.4.1`
+- [ ] `cargo-dist` / release-please changelog generation reviewed before publish — auto-generated entries must be human-edited for clarity
 
 ---
 
-## §6.6 Update Command Reference Template
+## §6.5 Migration Guide Checklist
 
-Use this template when generating update sections for README:
+Required whenever a release contains breaking changes (major bump or `feat!:` / `BREAKING CHANGE:` commit).
+
+- [ ] `CHANGELOG.md` `Changed` section includes `**BREAKING:**` entries with before/after examples
+- [ ] `MIGRATION.md` created (or version-specific section added) if migration steps exceed 3 lines
+- [ ] Deprecated symbols emit a compile-time or runtime warning at least one minor version before removal
+- [ ] Deprecation notice format: `@deprecated since <version> — use <replacement> instead`
+- [ ] CLI flag renames: old flag still accepted with a deprecation warning for one release cycle
+- [ ] Config file format changes: migration is automatic (with backup) or a `migrate` subcommand is provided
+- [ ] GitHub Release body links to the relevant CHANGELOG section and migration steps
+- [ ] Pinned GitHub Issue / Discussion opened for community questions on migration
+
+---
+
+## §6.6 README Updating Section Template
+
+Use when `install-best-practices.md` inline hint is insufficient (see §6.1 decision rule).
+Paste this block after `## Installation`, replacing `<tool>` with the binary name.
 
 ```markdown
 ## Updating
 
 | Method | Command |
 |--------|---------|
-| Homebrew | `brew upgrade tool` |
-| cargo | `cargo install tool@latest` |
-| npm | `npm update -g tool` |
-| pipx | `pipx upgrade tool` |
-| uv | `uv tool upgrade tool` |
-| go | `go install github.com/user/tool@latest` |
-| scoop | `scoop update tool` |
-| winget | `winget upgrade --id Publisher.ToolName` |
-| choco | `choco upgrade tool` |
-| Script (macOS/Linux) | Re-run install script |
-| Script (Windows) | Re-run install command |
+| Homebrew | `brew upgrade epicsagas/tap/<tool>` |
+| curl / PowerShell installer | Re-run the install command above |
+| cargo binstall | `cargo binstall <tool>@latest` |
+| cargo install | `cargo install <tool>` |
+
+Verify the update:
+
+​```bash
+<tool> --version
+​```
 ```
 
-**Rules:**
-- Only include rows for install methods the project actually supports
-- Commands must match the install method — never mix (e.g., don't show `brew upgrade` for a cargo-installed tool)
-- If only one install method exists, a single command line is sufficient (no table needed)
+**When the inline hint is sufficient** (preferred for epicsagas projects per `install-best-practices.md`):
 
----
+```markdown
+> `<tool> --version` to verify. Update with `brew upgrade epicsagas/tap/<tool>` or re-run the installer script.
+```
 
-## §6.7 Language-Specific Update Patterns
-
-When auditing, check the language-specific update conventions:
-
-### Rust (`languages/rust.md`)
-- cargo-dist generated installers: re-running the same `curl | sh` or `irm | iex` replaces the binary
-- Homebrew: `brew upgrade tool`
-- cargo-binstall: `cargo binstall tool@latest` (faster than `cargo install`)
-
-### Go (`languages/go.md`)
-- `go install ...@latest` always pulls latest — this IS the update command
-- goreleaser installers: re-run the same script
-- Homebrew: `brew upgrade tool`
-
-### Node.js (`languages/node.md`)
-- `npx tool@latest` always runs latest — no update needed
-- Global installs: `npm update -g tool`
-- Homebrew: `brew upgrade tool`
-
-### Python (`languages/python.md`)
-- uv: `uv tool upgrade tool` (or `uv tool upgrade --all`)
-- pipx: `pipx upgrade tool`
-- pip: `pip install --upgrade tool`
-- uvx: always latest, no update needed
-
-### Java (`languages/java.md`)
-- SDKMAN: `sdk install java <version>` (replaces previous)
-- Homebrew: `brew upgrade tool`
-- GraalVM binary: re-download from Releases
-
-### Deno (`languages/deno.md`)
-- `deno upgrade` (built-in self-update)
-- Homebrew: `brew upgrade deno`
-- Compiled binary: re-run `deno compile`
-
-### Bun (`languages/bun.md`)
-- `bun upgrade` (built-in self-update)
-- Global installs: `bun update -g tool`
-- Compiled binary: re-run `bun build --compile`
-
-### C/C++/Zig (`languages/systems.md`)
-- Homebrew: `brew upgrade tool`
-- apt: `sudo apt update && sudo apt install --only-upgrade tool`
-- dnf: `sudo dnf upgrade tool`
-- Static binary: re-download from Releases
-
-### Swift (`languages/swift.md`)
-- mint: `mint install user/tool@latest`
-- Homebrew: `brew upgrade tool`
-- SPM: `git pull && swift build -c release`
-
----
-
-## See Also
-
-- `checklist/release.md` — install commands and distribution pipeline
-- `languages/<lang>.md` — language-specific install and release details
-- `platforms/<platform>.md` — platform-specific package managers
+This single line covers Homebrew and curl/PowerShell installer users — the two most common install paths.
+Cargo users can infer `cargo binstall <tool>@latest` or `cargo install <tool>` without explicit guidance.

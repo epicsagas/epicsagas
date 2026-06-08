@@ -36,6 +36,33 @@ Build in this exact section order. Every section below is required unless marked
 
 ---
 
+### Step 0.5: Detect Project Type
+
+Adjust README structure based on project type before writing:
+
+| Project type | Key differences |
+|---|---|
+| **CLI tool** | Quick Start = install + one command; demo GIF shows terminal interaction |
+| **Library / crate / package** | Quick Start = add dependency + minimal code snippet; skip install section |
+| **Framework** | Quick Start = scaffold command + directory tree; comparison table is critical |
+| **Service / SaaS** | Quick Start = signup + API call; add pricing/tier section |
+
+**Detection heuristics:**
+- `Cargo.toml [[bin]]` or binary target → CLI tool
+- `Cargo.toml [lib]` only, no binary → Library
+- `package.json "main"` or `"exports"` without `"bin"` → Library
+- `pyproject.toml` with no `[project.scripts]` → Library
+- Ask user if ambiguous
+
+**Library-specific adjustments:**
+- Replace "Installation" heading with "Add to your project"
+- Use `cargo add`, `npm install`, `pip install` — skip Homebrew/curl installer
+- Add "API Reference" link section (docs.rs / pkg.go.dev / JSDoc)
+- Quick Start must include a minimal working code example (≤10 lines)
+- Skip demo GIF requirement (replace with code snippet)
+
+---
+
 ### 1. Above the Fold (first screen — most critical)
 
 Everything the visitor sees before scrolling must answer 3 questions:
@@ -261,7 +288,19 @@ Forbidden:
 
 #### Badge Design Style
 
-Use `style=for-the-badge` with `labelColor=0d1117` (dark background) and `logoColor=white`.
+**Default: `bold`** — same as epicsagas reference projects (epic-harness, alcove, etc.).
+If not specified by the user, ask interactively (see SKILL.md § Badge Style Selection).
+
+##### Style Presets
+
+| Preset | `style=` | `labelColor` | Feel | When to use |
+|--------|----------|--------------|------|-------------|
+| **`bold`** *(default)* | `for-the-badge` | `0d1117` | Dark, high-contrast, branded | Serious OSS tools, CLIs, libraries |
+| `classic` | `flat` | *(none)* | Minimal, GitHub-native | Lightweight libs, quick READMEs |
+| `modern` | `flat-square` | *(none)* | Clean, no rounded corners | Developer tools, monorepos |
+| `social` | `social` | *(none)* | Star/fork count display | Community-focused repos |
+| `plastic` | `plastic` | *(none)* | Raised/3D look | Legacy projects, classic OSS feel |
+
 Assign a distinct semantic color to each badge type — do not use shields.io defaults.
 
 | Badge type | `color` | Notes |
@@ -272,6 +311,13 @@ Assign a distinct semantic color to each badge type — do not use shields.io de
 | Downloads | `3498db` | blue — usage/volume |
 | Stars | `ffd700` | gold — community |
 | Issues | `ff6b6b` | red — attention |
+
+> For `classic` / `modern` / `social` / `plastic` presets, omit `labelColor` and `logoColor=white`.
+> Colors above still apply via the `color=` param.
+
+---
+
+##### bold (default) — epicsagas standard
 
 **Row 1 — activity stats** (stars, forks, issues, last-commit):
 
@@ -293,6 +339,28 @@ Assign a distinct semantic color to each badge type — do not use shields.io de
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-3fb950?style=for-the-badge&labelColor=0d1117" /></a>
 </p>
 ```
+
+---
+
+##### classic
+
+```markdown
+[![Stars](https://img.shields.io/github/stars/user/repo?style=flat&color=ffd700&logo=github)](link)
+[![Version](https://img.shields.io/crates/v/project?style=flat&color=fc8d62&logo=rust)](link)
+[![License](https://img.shields.io/badge/license-Apache--2.0-3fb950?style=flat)](link)
+```
+
+---
+
+##### modern
+
+```markdown
+[![Stars](https://img.shields.io/github/stars/user/repo?style=flat-square&color=ffd700&logo=github)](link)
+[![Version](https://img.shields.io/crates/v/project?style=flat-square&color=fc8d62&logo=rust)](link)
+[![License](https://img.shields.io/badge/license-Apache--2.0-3fb950?style=flat-square)](link)
+```
+
+---
 
 For npm: swap `logo=rust` → `logo=npm`, `color=fc8d62` → `color=cb3837`.
 For PyPI: swap `logo=rust` → `logo=python`, `color=fc8d62` → `color=3776ab`.
