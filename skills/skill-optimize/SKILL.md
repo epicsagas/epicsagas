@@ -135,12 +135,6 @@ Compare baseline vs optimized accuracy. If positive delta → apply `best_skill.
 | Environment | Target Skill | Data Source | Baseline → Optimized |
 |-------------|-------------|-------------|---------------------|
 | vaultdoctor | vault-doctor | vault-doctor scan --json | 70.6% → 100% (+29.4%p, 1 step) |
-| sqlx_skill | sqlx | generated (60 items) | 66.7% → 66.7% (pipeline verified) |
-
-### Reference Implementations
-
-- `envs/sqlx_skill/` — complete adapter, evaluator, benchmark generator
-- `configs/sqlx_skill.yaml` — ready-to-use config
 
 ## Red Flags
 
