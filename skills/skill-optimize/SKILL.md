@@ -83,8 +83,6 @@ TARGET_DIR/.skillopt/
 │   ├── evaluator.py    # response scoring (em, f1)
 │   ├── data/
 │   │   └── split/      # train.json, val.json, test.json
-│   ├── skills/
-│   │   └── initial.md  # seed skill (copy of current)
 │   └── prompts/
 │       └── rollout_system.md
 └── outputs/            # training results
@@ -98,6 +96,12 @@ Key methods to implement (from `EnvAdapter` ABC):
 ### Step 4: Configure
 
 Copy `configs/default.yaml` → `configs/{env_name}/default.yaml`, fill env-specific fields.
+
+Set `skill_init` to the original SKILL.md path directly — **never copy the skill document**:
+```yaml
+env:
+  skill_init: "TARGET_DIR/SKILL.md"
+```
 
 ### Step 5: Run training
 
