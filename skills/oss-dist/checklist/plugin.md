@@ -1,3 +1,11 @@
+---
+name: plugin
+description: AI coding tool plugin distribution and auto-update checklist. Covers plugin.json manifest, SessionStart bootstrap, multi-tool installation (Claude Code, Codex, Cursor, etc.), binary auto-update via GitHub API, and version bump checklist. Implementation-focused, assumes Rust CLI via cargo-dist.
+tags: [layer/checklist, plugin, ai-tools, distribution]
+type: checklist
+scope: epicsagas
+---
+
 # Plugin Distribution — AI Coding Tool Integration & Auto-Update
 
 > Install/update automation checklist for CLI tools integrated as plugins into AI coding tools

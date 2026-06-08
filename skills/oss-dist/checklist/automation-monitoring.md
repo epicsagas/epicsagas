@@ -1,3 +1,10 @@
+---
+name: automation-monitoring
+description: Release automation tool comparison and deployment monitoring guide. Covers cargo-dist, GoReleaser, release-plz, Changesets, CI reusable workflows, download tracking, security scanning, and Windows deployment. Reference guide, not a checklist.
+tags: [layer/guide, release, automation, monitoring]
+type: guide
+---
+
 # Release Automation & Monitoring Guide (2026)
 
 > A comprehensive guide for managing release automation, deployment monitoring,
