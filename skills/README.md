@@ -34,15 +34,15 @@ Born from `introspect` analysis — individual skills targeting specific cogniti
 ```bash
 # Claude Code
 claude plugin marketplace add epicsagas/plugins
-claude plugin install epicsagas@epicsagas
+claude plugin enable epicsagas
 
 # Codex CLI
 codex plugin marketplace add epicsagas/plugins
-codex plugin add epicsagas@epicsagas
+# In Codex TUI
+/plugins install epicsagas
 
 # Antigravity
-agy plugin import claude
-agy plugin enable epicsagas
+agy plugin install https://github.com/epicsagas/epicsagas
 ```
 
 ## License
