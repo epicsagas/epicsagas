@@ -45,6 +45,14 @@ _BUILTIN_ENVS = [
     # vaultdoctor, alcove_skill — not in pip package; add locally if needed
 ]
 
+# Local adapters: (name, file_path, class_name)
+_CUSTOM_ENVS: list[tuple[str, str, str]] = []
+
+
+def register_custom_env(name: str, adapter_path: str, class_name: str) -> None:
+    """Register a local adapter file for an environment."""
+    _CUSTOM_ENVS.append((name, adapter_path, class_name))
+
 
 def _register_builtins() -> None:
     for name, module_path, cls_name in _BUILTIN_ENVS:
@@ -57,6 +65,25 @@ def _register_builtins() -> None:
             _ENV_REGISTRY[name] = getattr(mod, cls_name)
         except (ImportError, AttributeError):
             pass
+
+    # Load local adapters from file paths
+    for name, adapter_path, cls_name in _CUSTOM_ENVS:
+        if name in _ENV_REGISTRY:
+            continue
+        try:
+            import importlib.util
+
+            spec = importlib.util.spec_from_file_location(
+                f"skillopt_custom_{name}", adapter_path
+            )
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                _ENV_REGISTRY[name] = getattr(mod, cls_name)
+        except Exception as exc:
+            print(
+                f"  Warning: failed to load custom env '{name}' from {adapter_path}: {exc}"
+            )
 
 
 def get_adapter(cfg: dict):
@@ -98,6 +125,18 @@ def main() -> None:
     cfg = _load(args.config, overrides=args.cfg_options)
     structured = is_structured(cfg)
     flat = flatten_config(cfg) if structured else cfg
+
+    # Expand ~ in path fields
+    for key in ("skill_init", "out_root", "split_dir", "adapter_path", "data_path"):
+        if flat.get(key):
+            flat[key] = os.path.expanduser(flat[key])
+
+    # Register custom adapter if specified in config
+    adapter_path = flat.get("adapter_path", "")
+    env_name = flat.get("env") or flat.get("env_name", "")
+    if adapter_path and env_name:
+        adapter_cls_name = flat.get("adapter_class", "Adapter")
+        register_custom_env(env_name, adapter_path, adapter_cls_name)
 
     # Auto-generate output root
     if not flat.get("out_root"):
