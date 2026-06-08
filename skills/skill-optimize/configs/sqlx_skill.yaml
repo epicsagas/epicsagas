@@ -1,0 +1,57 @@
+# SQLx SkillOpt config — self-contained
+model:
+  backend: claude
+  optimizer_backend: claude_chat
+  target_backend: claude_chat
+  optimizer: claude-sonnet-4-6
+  target: claude-sonnet-4-6
+  reasoning_effort: medium
+  claude_code_exec_path: claude
+  claude_code_exec_profile: ""
+  claude_code_exec_use_sdk: auto
+  claude_code_exec_effort: medium
+  claude_code_exec_max_thinking_tokens: 16384
+  codex_trace_to_optimizer: true
+
+train:
+  num_epochs: 4
+  train_size: 0
+  batch_size: 8
+  accumulation: 1
+  seed: 42
+
+gradient:
+  minibatch_size: 4
+  merge_batch_size: 4
+  analyst_workers: 2
+  max_analyst_rounds: 3
+  failure_only: false
+
+optimizer:
+  learning_rate: 4
+  min_learning_rate: 2
+  lr_scheduler: cosine
+  lr_control_mode: fixed
+  skill_update_mode: patch
+  use_slow_update: true
+  slow_update_samples: 20
+  longitudinal_pair_policy: mixed
+  use_meta_skill: true
+
+evaluation:
+  use_gate: true
+  sel_env_num: 0
+  test_env_num: 0
+  eval_test: true
+
+env:
+  name: sqlx_skill
+  skill_init: "~/.claude/skills/sqlx/.skillopt/envs/sqlx_skill/skills/initial.md"
+  split_mode: split_dir
+  split_dir: "~/.claude/skills/sqlx/.skillopt/envs/sqlx_skill/data/split"
+  workers: 4
+  exec_timeout: 60
+  max_completion_tokens: 4096
+  out_root: "~/.claude/skills/sqlx/.skillopt/outputs"
+  adapter_path: "~/.claude/skills/sqlx/.skillopt/envs/sqlx_skill/adapter.py"
+  adapter_class: "SQLxAdapter"
