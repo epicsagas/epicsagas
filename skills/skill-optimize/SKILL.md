@@ -10,10 +10,13 @@ Use SkillOpt to automatically improve agent skill documents through trajectory-d
 ## Path Convention
 
 ```
-SKILL_DIR = {this skill-optimize directory}
+SKILL_DIR  = {this skill-optimize directory}
+WORK_DIR   = SKILL_DIR/.skillopt        # training data persists here
 ```
 
 All paths below use `SKILL_DIR` — resolve it at runtime by locating this `SKILL.md` file and computing `dirname(SKILL.md)/..`.
+
+`.skillopt/` stores training outputs, data splits, and run history. **Never delete `.skillopt/`** — it contains the audit trail and enables resume.
 
 ## When to Trigger
 
@@ -99,7 +102,7 @@ python scripts/train.py --config configs/{env_name}/default.yaml
 
 Training loop: Rollout → Reflect → Aggregate → Select (gate) → Update (bounded edit)
 
-Output: `outputs/{env_name}_{model}_{timestamp}/best_skill.md`
+Output: `.skillopt/outputs/{env_name}_{model}_{timestamp}/best_skill.md`
 
 ### Step 6: Evaluate and apply
 
