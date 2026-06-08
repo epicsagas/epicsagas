@@ -5,6 +5,7 @@ Usage
 -----
     python scripts/train.py --config configs/{env_name}/default.yaml
     python scripts/train.py --config configs/default.yaml --cfg-options train.num_epochs=2
+    python scripts/train.py --config configs/default.yaml --probe   # 1-epoch probe then decide
 
 Uses ReflACTTrainer from the installed skillopt package.
 Built-in environment adapters are registered automatically.
@@ -14,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import json
 import os
 
 from skillopt.config import (
@@ -116,7 +118,49 @@ def parse_args() -> argparse.Namespace:
         default=[],
         help="Override config: section.key=value",
     )
+    p.add_argument(
+        "--probe",
+        action="store_true",
+        help="Run 1-epoch probe with slow_update/meta_skill disabled. "
+        "If no patches generated, exit early. Otherwise resume full training.",
+    )
     return p.parse_args()
+
+
+# ── Helpers ──────────────────────────────────────────────────────────────────
+
+
+def _load_history(out_root: str) -> list[dict]:
+    path = os.path.join(out_root, "history.json")
+    if not os.path.isfile(path):
+        return []
+    with open(path) as f:
+        return json.load(f)
+
+
+def _count_patches(history: list[dict]) -> int:
+    return sum(h.get("n_patches", 0) for h in history)
+
+
+def _count_skips(history: list[dict]) -> int:
+    return sum(1 for h in history if h.get("action") == "skip_no_patches")
+
+
+def _print_header(flat: dict) -> None:
+    print(f"\n{'=' * 60}")
+    print(f"  SkillOpt — Text-Space Skill Document Optimizer")
+    print(f"{'=' * 60}")
+    print(f"  env:             {flat.get('env') or flat.get('env_name')}")
+    print(f"  optimizer_model: {flat.get('optimizer_model')}")
+    print(f"  target_model:    {flat.get('target_model')}")
+    print(f"  epochs:          {flat.get('num_epochs')}")
+    print(f"  batch_size:      {flat.get('batch_size')}")
+    print(f"  edit_budget:     {flat.get('edit_budget')}")
+    print(f"  out_root:        {flat['out_root']}")
+    print(f"{'=' * 60}\n")
+
+
+# ── Main ─────────────────────────────────────────────────────────────────────
 
 
 def main() -> None:
@@ -147,22 +191,86 @@ def main() -> None:
             os.path.join("outputs", f"skillopt_{env}_{model}_{ts}")
         )
 
+    if args.probe:
+        _run_probe(flat)
+    else:
+        _run_full(flat)
+
+
+def _run_full(flat: dict) -> None:
+    """Run full training with all config options."""
+    _print_header(flat)
+
+    adapter = get_adapter(flat)
+    trainer = ReflACTTrainer(flat, adapter)
+    summary = trainer.train()
+
+    _print_summary(flat, summary)
+
+
+def _run_probe(flat: dict) -> None:
+    """Two-pass training: lightweight probe then conditional full run.
+
+    Pass 1 (probe): 1 epoch, slow_update=false, meta_skill=false.
+    If 0 patches → skill already optimal, exit.
+    If patches → resume with remaining epochs + full features.
+    """
+    total_epochs = flat.get("num_epochs", 4)
+    original_slow = flat.get("use_slow_update", True)
+    original_meta = flat.get("use_meta_skill", True)
+
+    # ── Pass 1: probe ───────────────────────────────────────────────────
+    flat["num_epochs"] = 1
+    flat["use_slow_update"] = False
+    flat["use_meta_skill"] = False
+
     print(f"\n{'=' * 60}")
-    print(f"  SkillOpt — Text-Space Skill Document Optimizer")
+    print(f"  SkillOpt — PROBE (1 epoch, no slow_update/meta_skill)")
     print(f"{'=' * 60}")
     print(f"  env:             {flat.get('env') or flat.get('env_name')}")
-    print(f"  optimizer_model: {flat.get('optimizer_model')}")
-    print(f"  target_model:    {flat.get('target_model')}")
-    print(f"  epochs:          {flat.get('num_epochs')}")
-    print(f"  batch_size:      {flat.get('batch_size')}")
-    print(f"  edit_budget:     {flat.get('edit_budget')}")
+    print(f"  epochs:          1/{total_epochs} (probe)")
+    print(f"  slow_update:     OFF")
+    print(f"  meta_skill:      OFF")
     print(f"  out_root:        {flat['out_root']}")
+    print(f"{'=' * 60}\n")
+
+    adapter = get_adapter(flat)
+    trainer = ReflACTTrainer(flat, adapter)
+    trainer.train()
+
+    history = _load_history(flat["out_root"])
+    n_patches = _count_patches(history)
+    n_skips = _count_skips(history)
+
+    print(f"\n  [probe] patches={n_patches} skips={n_skips}")
+
+    if n_patches == 0:
+        print(f"\n  ⚠ No patches generated in probe epoch.")
+        print(f"  Skill appears already optimal or analyst cannot improve it.")
+        print(f"  Skipping remaining {total_epochs - 1} epochs.\n")
+        return
+
+    # ── Pass 2: full training with resume ───────────────────────────────
+    flat["num_epochs"] = total_epochs
+    flat["use_slow_update"] = original_slow
+    flat["use_meta_skill"] = original_meta
+
+    print(f"\n{'=' * 60}")
+    print(f"  SkillOpt — FULL TRAINING (resume from probe)")
+    print(f"{'=' * 60}")
+    print(f"  epochs:          {total_epochs} (resume from epoch 2)")
+    print(f"  slow_update:     {'ON' if original_slow else 'OFF'}")
+    print(f"  meta_skill:      {'ON' if original_meta else 'OFF'}")
     print(f"{'=' * 60}\n")
 
     adapter = get_adapter(flat)
     trainer = ReflACTTrainer(flat, adapter)
     summary = trainer.train()
 
+    _print_summary(flat, summary)
+
+
+def _print_summary(flat: dict, summary: dict) -> None:
     print(f"\n  Output saved to: {flat['out_root']}")
     if summary.get("test_hard") is not None:
         print(f"  Final test: {summary['test_hard']:.4f}")

@@ -105,6 +105,12 @@ env:
 
 ### Step 5: Run training
 
+**Recommended: probe mode** — runs 1 lightweight epoch first, exits early if skill is already optimal:
+```bash
+python scripts/train.py --config configs/{env_name}/default.yaml --probe
+```
+
+Full training (all epochs unconditionally):
 ```bash
 python scripts/train.py --config configs/{env_name}/default.yaml
 ```
@@ -116,6 +122,23 @@ Output: `TARGET_DIR/.skillopt/outputs/{env_name}_{model}_{timestamp}/best_skill.
 ### Step 6: Evaluate and apply
 
 Compare baseline vs optimized accuracy. If positive delta → apply `best_skill.md` to skill path.
+
+## Token-Saving Defaults
+
+SkillOpt is text-space (not weight-space), but each epoch calls claude CLI for rollouts and the optimizer API for reflect/merge. Token cost scales with `num_epochs × batch_size × (1 + use_slow_update × 20)`.
+
+Recommended config for token efficiency:
+```yaml
+num_epochs: 4
+failure_only: true          # skip success patches unless needed
+use_slow_update: false      # disable expensive epoch-boundary re-rollout (20×2 items)
+use_meta_skill: false       # skip meta-skill overhead
+```
+
+Use `--probe` to auto-detect whether full training is worthwhile:
+- Probe: 1 epoch, no slow_update, no meta_skill → ~15-20% of full-run tokens
+- If 0 patches → exit (skill already optimal)
+- If patches found → resume with remaining epochs + optional slow_update
 
 ## SkillOpt Architecture Reference
 
