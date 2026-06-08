@@ -2,13 +2,13 @@
 """Generate data splits for SkillOpt training.
 
 Usage:
-    cd /Volumes/T5/projects/SkillOpt
-    source .venv/bin/activate
+    cd "$SKILLOPT_DIR" && source .venv/bin/activate
     python scripts/build_{env_name}_split.py
 
 Override via env vars:
     SPLIT_DIR, VAULT_ROOT, RATIO, SEED
 """
+
 import json
 import os
 import random
@@ -48,8 +48,8 @@ def stratified_split(items: list[dict], ratio: tuple, seed: int):
         t = round(n * ratio[0] / sum(ratio))
         v = round(n * ratio[1] / sum(ratio))
         train.extend(kind_items[:t])
-        val.extend(kind_items[t:t + v])
-        test.extend(kind_items[t + v:])
+        val.extend(kind_items[t : t + v])
+        test.extend(kind_items[t + v :])
     return train, val, test
 
 

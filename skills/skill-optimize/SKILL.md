@@ -5,7 +5,16 @@ description: "Uses SkillOpt (text-space optimizer) to train and evolve natural-l
 
 # Skill Optimize — Text-Space Skill Document Optimizer
 
-Use Microsoft's SkillOpt to automatically improve agent skill documents through trajectory-driven edits and validation-gated updates.
+Use SkillOpt to automatically improve agent skill documents through trajectory-driven edits and validation-gated updates.
+
+## Path Convention
+
+```
+SKILL_DIR = {this skill-optimize directory}
+SKILLOPT_DIR = SKILL_DIR/.skillopt     # cloned SkillOpt engine
+```
+
+All paths below use `SKILLOPT_DIR` — resolve it at runtime by locating this `SKILL.md` file and computing `dirname(SKILL.md)/../.skillopt`.
 
 ## When to Trigger
 
@@ -24,8 +33,17 @@ Use Microsoft's SkillOpt to automatically improve agent skill documents through 
 ## Prerequisites
 
 ```bash
-test -d /Volumes/T5/projects/SkillOpt || echo "Clone SkillOpt first"
-test -f /Volumes/T5/projects/SkillOpt/.venv/bin/activate || echo "Create venv first"
+# Resolve SKILLOPT_DIR (example — adapt to actual skill location)
+SKILLOPT_DIR="$(dirname "$(find . -path '*/skill-optimize/SKILL.md' -print -quit)")/.skillopt"
+
+# Install if missing
+if [ ! -d "$SKILLOPT_DIR/.git" ]; then
+    bash "$(dirname "$(find . -path '*/skill-optimize/SKILL.md' -print -quit)")/scripts/install.sh"
+fi
+
+# Verify
+test -d "$SKILLOPT_DIR" || echo "Run install.sh first"
+test -f "$SKILLOPT_DIR/.venv/bin/activate" || echo "Run install.sh first"
 claude auth status 2>/dev/null || echo "Run claude auth login"
 ```
 
@@ -51,7 +69,7 @@ Validation criteria:
 Use `scripts/build_env_split.py` — override `collect_tasks()` and `build_items()` for your environment.
 
 ```bash
-cd /Volumes/T5/projects/SkillOpt && source .venv/bin/activate
+cd "$SKILLOPT_DIR" && source .venv/bin/activate
 SPLIT_DIR=data/{env}_split python scripts/build_env_split.py
 ```
 
@@ -91,7 +109,7 @@ Key methods to implement (from `EnvAdapter` ABC):
 ### Step 5: Run training
 
 ```bash
-cd /Volumes/T5/projects/SkillOpt && source .venv/bin/activate
+cd "$SKILLOPT_DIR" && source .venv/bin/activate
 python scripts/train.py --config configs/{env_name}/default.yaml
 ```
 
