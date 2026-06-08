@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import math
 import os
 
 from skillopt.config import (
@@ -44,7 +45,6 @@ _BUILTIN_ENVS = [
     ),
     ("docvqa", "skillopt.envs.docvqa.adapter", "DocVQAAdapter"),
     ("officeqa", "skillopt.envs.officeqa.adapter", "OfficeQAAdapter"),
-    # vaultdoctor, alcove_skill — not in pip package; add locally if needed
 ]
 
 # Local adapters: (name, file_path, class_name)
@@ -146,17 +146,95 @@ def _count_skips(history: list[dict]) -> int:
     return sum(1 for h in history if h.get("action") == "skip_no_patches")
 
 
-def _print_header(flat: dict) -> None:
+def _estimate_calls(flat: dict) -> dict:
+    """Estimate total API calls for current config.
+
+    Returns breakdown of optimizer vs target calls.
+    """
+    epochs = flat.get("num_epochs", 4)
+    batch = flat.get("batch_size", 8)
+    mini = flat.get("minibatch_size", 4)
+    accumulation = flat.get("accumulation", 1)
+    use_slow = flat.get("use_slow_update", False)
+    slow_samples = flat.get("slow_update_samples", 20)
+    use_meta = flat.get("use_meta_skill", False)
+
+    train_size = flat.get("train_size", 0)
+    if train_size > 0:
+        steps_per_epoch = max(1, math.ceil(train_size / (batch * accumulation)))
+    else:
+        # Default: ~4 steps when train_size=0 (auto-detected by trainer)
+        steps_per_epoch = 4
+
+    # Rollout: batch_size target calls per step × accumulation
+    rollout_target = steps_per_epoch * batch * accumulation * epochs
+    # Baseline + test evaluations
+    baseline_target = batch  # baseline on selection split
+    test_target = batch  # final test
+
+    # Reflect: (batch / minibatch_size) optimizer calls per step
+    reflect_opt = steps_per_epoch * math.ceil(batch / mini) * epochs
+    # Aggregate: ~ceil(reflect_batches / merge_batch_size) per step
+    merge_batch = flat.get("merge_batch_size", 4)
+    aggregate_opt = steps_per_epoch * math.ceil(
+        math.ceil(batch / mini) / merge_batch
+    ) * epochs
+    # Select (ranking): 1 per step, only when patches > learning_rate
+    select_opt = steps_per_epoch * epochs
+    # Gate: selection split evaluation per step → target calls
+    gate_target = steps_per_epoch * batch * epochs
+
+    # Slow update: N × 2 target rollouts + 1 optimizer call per epoch (from epoch 2)
+    slow_target = (epochs - 1) * slow_samples * 2 if use_slow else 0
+    slow_opt = (epochs - 1) if use_slow else 0
+
+    # Meta skill: 1 optimizer call per epoch (from epoch 2)
+    meta_opt = (epochs - 1) if use_meta else 0
+
+    total_target = rollout_target + baseline_target + test_target + gate_target + slow_target
+    total_opt = reflect_opt + aggregate_opt + select_opt + slow_opt + meta_opt
+
+    return {
+        "epochs": epochs,
+        "steps_per_epoch": steps_per_epoch,
+        "target_calls": total_target,
+        "optimizer_calls": total_opt,
+        "total_calls": total_target + total_opt,
+        "breakdown": {
+            "rollout_target": rollout_target,
+            "gate_target": gate_target,
+            "slow_update_target": slow_target,
+            "reflect_opt": reflect_opt,
+            "aggregate_opt": aggregate_opt,
+            "select_opt": select_opt,
+            "slow_update_opt": slow_opt,
+            "meta_skill_opt": meta_opt,
+        },
+    }
+
+
+def _print_header(flat: dict, mode: str = "FULL") -> None:
+    cost = _estimate_calls(flat)
+    env = flat.get("env") or flat.get("env_name", "")
+
     print(f"\n{'=' * 60}")
-    print(f"  SkillOpt — Text-Space Skill Document Optimizer")
+    print(f"  SkillOpt — Text-Space Skill Document Optimizer [{mode}]")
     print(f"{'=' * 60}")
-    print(f"  env:             {flat.get('env') or flat.get('env_name')}")
+    print(f"  env:             {env}")
     print(f"  optimizer_model: {flat.get('optimizer_model')}")
     print(f"  target_model:    {flat.get('target_model')}")
     print(f"  epochs:          {flat.get('num_epochs')}")
     print(f"  batch_size:      {flat.get('batch_size')}")
+    print(f"  failure_only:    {flat.get('failure_only', False)}")
+    print(f"  slow_update:     {flat.get('use_slow_update', False)}")
+    print(f"  meta_skill:      {flat.get('use_meta_skill', False)}")
     print(f"  edit_budget:     {flat.get('edit_budget')}")
     print(f"  out_root:        {flat['out_root']}")
+    print(f"{'─' * 60}")
+    print(f"  Cost estimate:")
+    print(f"    target calls:    ~{cost['target_calls']}")
+    print(f"    optimizer calls: ~{cost['optimizer_calls']}")
+    print(f"    total calls:     ~{cost['total_calls']}")
     print(f"{'=' * 60}\n")
 
 
@@ -199,7 +277,7 @@ def main() -> None:
 
 def _run_full(flat: dict) -> None:
     """Run full training with all config options."""
-    _print_header(flat)
+    _print_header(flat, mode="FULL")
 
     adapter = get_adapter(flat)
     trainer = ReflACTTrainer(flat, adapter)
@@ -213,26 +291,21 @@ def _run_probe(flat: dict) -> None:
 
     Pass 1 (probe): 1 epoch, slow_update=false, meta_skill=false.
     If 0 patches → skill already optimal, exit.
-    If patches → resume with remaining epochs + full features.
+    If patches → resume with remaining epochs + re-enable slow/meta from epoch 2.
+
+    Token savings when skill is already optimal: ~80-85%.
+    Token savings when patches found: ~15-20% (probe is lightweight).
     """
     total_epochs = flat.get("num_epochs", 4)
-    original_slow = flat.get("use_slow_update", True)
-    original_meta = flat.get("use_meta_skill", True)
+    original_slow = flat.get("use_slow_update", False)
+    original_meta = flat.get("use_meta_skill", False)
 
     # ── Pass 1: probe ───────────────────────────────────────────────────
     flat["num_epochs"] = 1
     flat["use_slow_update"] = False
     flat["use_meta_skill"] = False
 
-    print(f"\n{'=' * 60}")
-    print(f"  SkillOpt — PROBE (1 epoch, no slow_update/meta_skill)")
-    print(f"{'=' * 60}")
-    print(f"  env:             {flat.get('env') or flat.get('env_name')}")
-    print(f"  epochs:          1/{total_epochs} (probe)")
-    print(f"  slow_update:     OFF")
-    print(f"  meta_skill:      OFF")
-    print(f"  out_root:        {flat['out_root']}")
-    print(f"{'=' * 60}\n")
+    _print_header(flat, mode="PROBE 1/1")
 
     adapter = get_adapter(flat)
     trainer = ReflACTTrainer(flat, adapter)
@@ -242,12 +315,15 @@ def _run_probe(flat: dict) -> None:
     n_patches = _count_patches(history)
     n_skips = _count_skips(history)
 
-    print(f"\n  [probe] patches={n_patches} skips={n_skips}")
+    print(f"\n  [probe result] patches={n_patches} skips={n_skips}")
 
     if n_patches == 0:
         print(f"\n  ⚠ No patches generated in probe epoch.")
         print(f"  Skill appears already optimal or analyst cannot improve it.")
-        print(f"  Skipping remaining {total_epochs - 1} epochs.\n")
+        saved = total_epochs - 1
+        print(f"  Early exit: saved ~{saved} epochs of training.")
+        print(f"  Tip: try --cfg-options gradient.failure_only=false if you want")
+        print(f"       success-pattern analysis, or increase num_epochs.\n")
         return
 
     # ── Pass 2: full training with resume ───────────────────────────────
@@ -255,13 +331,7 @@ def _run_probe(flat: dict) -> None:
     flat["use_slow_update"] = original_slow
     flat["use_meta_skill"] = original_meta
 
-    print(f"\n{'=' * 60}")
-    print(f"  SkillOpt — FULL TRAINING (resume from probe)")
-    print(f"{'=' * 60}")
-    print(f"  epochs:          {total_epochs} (resume from epoch 2)")
-    print(f"  slow_update:     {'ON' if original_slow else 'OFF'}")
-    print(f"  meta_skill:      {'ON' if original_meta else 'OFF'}")
-    print(f"{'=' * 60}\n")
+    _print_header(flat, mode=f"FULL (resume 2/{total_epochs})")
 
     adapter = get_adapter(flat)
     trainer = ReflACTTrainer(flat, adapter)

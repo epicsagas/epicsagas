@@ -1,4 +1,16 @@
-# SkillOpt default configuration — self-contained (no _base_ inheritance).
+# SkillOpt default configuration — token-efficient defaults.
+#
+# Token cost formula (approximate):
+#   total_calls ≈ epochs × steps_per_epoch × (batch_size / minibatch_size)
+#                 + epochs × use_slow_update × slow_update_samples × 2
+#                 + epochs × use_meta_skill
+#
+# Cheapest run (--probe, defaults below):
+#   1 epoch × ~4 steps × (8/4) = ~8 optimizer + ~32 target calls ≈ 40 calls
+# Full run (4 epochs, slow_update=false):
+#   4 × ~4 × 2 + baseline + test ≈ ~40 optimizer + ~128 target ≈ 170 calls
+# Full run (4 epochs, slow_update=true):
+#   + 3 × 20 × 2 = +120 target calls ≈ 290 calls
 
 model:
   backend: claude
@@ -26,18 +38,18 @@ gradient:
   merge_batch_size: 4
   analyst_workers: 2
   max_analyst_rounds: 3
-  failure_only: false
+  failure_only: true              # skip success analysis → ~50% fewer reflect calls
 
 optimizer:
   learning_rate: 4
   min_learning_rate: 2
-  lr_scheduler: cosine
+  lr_scheduler: cosine            # edit budget decays over training
   lr_control_mode: fixed
   skill_update_mode: patch
-  use_slow_update: true
+  use_slow_update: false          # disable expensive epoch-boundary re-rollout (20×2 calls)
   slow_update_samples: 20
   longitudinal_pair_policy: mixed
-  use_meta_skill: true
+  use_meta_skill: false           # skip meta-skill overhead (+1 optimizer call/epoch)
 
 evaluation:
   use_gate: true
@@ -54,4 +66,4 @@ env:
   workers: 4
   exec_timeout: 120
   max_completion_tokens: 4096
-  out_root: ""                              # set to TARGET_DIR/.skillopt/outputs at runtime
+  out_root: ""                    # set to TARGET_DIR/.skillopt/outputs at runtime
