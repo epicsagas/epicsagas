@@ -1,7 +1,7 @@
 {
   "name": "epicsagas",
-  "version": "0.3.0",
-  "description": "Personal skill collection — problem discovery, cognitive audit, corrective routines, OSS distribution readiness.",
+  "version": "0.4.0",
+  "description": "Personal skill collection — problem discovery, cognitive audit, corrective routines, OSS distribution readiness, and git workspace management.",
   "author": {
     "name": "epicsagas",
     "url": "https://github.com/epicsagas"

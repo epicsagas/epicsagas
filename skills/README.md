@@ -29,6 +29,12 @@ Born from `introspect` analysis — individual skills targeting specific cogniti
 | **tech-debt-scan** | Codebase debt inventory with risk scoring | Hidden debt compounding, "fix it later" pattern | "tech debt", "TODO scan", "debt audit" |
 | **env-test** | Cross-environment compatibility validation | "Works on my machine" syndrome | "env test", "compatibility", "works elsewhere" |
 
+### Tooling
+
+| Skill | Description | Triggers |
+|-------|-------------|----------|
+| **git-workspace** | Git workspace manager — sync repos, bump versions, project health dashboard. Works in submodule monorepos, flat multi-repo, and single projects. | "sync repos", "pull all", "bump version", "git tags", "overview", "dashboard", "project status" |
+
 ### Experimental
 
 | Skill | Description | Triggers |
