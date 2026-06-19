@@ -80,13 +80,29 @@ collect_repo_data() {
     fi
   fi
 
-  DATA_LATEST_TAG=$(git -C "$path" describe --tags --abbrev=0 2>/dev/null || echo "")
+  # HEAD is always the local checkout (display only).
   DATA_HEAD=$(git -C "$path" rev-parse --short HEAD 2>/dev/null || echo "?")
 
-  if [ -n "$DATA_LATEST_TAG" ]; then
-    DATA_COMMITS_AHEAD=$(git -C "$path" rev-list --count "${DATA_LATEST_TAG}..HEAD" 2>/dev/null || echo "0")
+  # tag/ahead: GitHub repo → GitHub API (independent of local checkout state);
+  #            local-only repo → fall back to local git.
+  if [ -n "$github_repo" ]; then
+    local default_branch
+    default_branch=$(gh api "repos/$github_repo" --jq '.default_branch' 2>/dev/null || echo "main")
+    DATA_LATEST_TAG=$(gh api "repos/$github_repo/tags" --jq '.[0].name' 2>/dev/null || echo "")
+    if [ -n "$DATA_LATEST_TAG" ]; then
+      DATA_COMMITS_AHEAD=$(gh api "repos/$github_repo/compare/${DATA_LATEST_TAG}...${default_branch}" \
+        --jq '.ahead_by' 2>/dev/null || echo "0")
+    else
+      DATA_COMMITS_AHEAD=$(gh api "repos/$github_repo/commits?per_page=1" \
+        --jq 'length' 2>/dev/null || echo "0")
+    fi
   else
-    DATA_COMMITS_AHEAD=$(git -C "$path" rev-list --count HEAD 2>/dev/null || echo "0")
+    DATA_LATEST_TAG=$(git -C "$path" describe --tags --abbrev=0 2>/dev/null || echo "")
+    if [ -n "$DATA_LATEST_TAG" ]; then
+      DATA_COMMITS_AHEAD=$(git -C "$path" rev-list --count "${DATA_LATEST_TAG}..HEAD" 2>/dev/null || echo "0")
+    else
+      DATA_COMMITS_AHEAD=$(git -C "$path" rev-list --count HEAD 2>/dev/null || echo "0")
+    fi
   fi
 }
 
