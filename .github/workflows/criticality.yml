@@ -1,0 +1,40 @@
+name: Criticality Score
+
+on:
+  schedule:
+    # 매주 월요일 00:13 UTC (KST 09:13). off-minute.
+    - cron: "13 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install criticality_score
+        run: pip install "criticality_score" "PyGithub<2"
+
+      - name: Score all original repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/criticality.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add criticality/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(criticality): weekly score update"
+            git push
+          fi

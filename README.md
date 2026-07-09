@@ -48,6 +48,9 @@ Personal agent skill collection for AI coding agents — problem discovery, cogn
 
 ![Top Languages](./metrics-languages.svg)
 
+<!-- OpenSSF Criticality Score 상위 5개 (GitHub Actions 매주 갱신) -->
+**🛡️ OSS Criticality Top 5** → [전체 순위 보기](./criticality/README.md)
+
 <!-- 연속 기여 -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=epicsagas&theme=tokyonight&hide_border=true&background=00000000&ring=C9462B&fire=E8533F&currStreakLabel=C9462B">
