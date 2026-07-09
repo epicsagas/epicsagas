@@ -1,8 +1,14 @@
 {
-  "generated_at": "2026-07-09 15:49 UTC",
+  "generated_at": "2026-07-09 15:54 UTC",
   "org": "epicsagas",
-  "count": 33,
-  "failed": [],
+  "count": 32,
+  "failed": [
+    {
+      "name": "epicsagas",
+      "url": "https://github.com/epicsagas/epicsagas",
+      "error": "Command '['criticality_score', '--repo', 'https://github.com/epicsagas/epicsagas', '--format', 'json']' timed out after "
+    }
+  ],
   "repos": [
     {
       "name": "epic-harness",
@@ -41,24 +47,6 @@
       "criticality_score": 0.2017
     },
     {
-      "name": "epicsagas",
-      "url": "https://github.com/epicsagas/epicsagas",
-      "language": "Python",
-      "description": "epicsagas",
-      "created_since": 2,
-      "updated_since": 0,
-      "contributor_count": 2,
-      "watchers_count": 1,
-      "org_count": 1,
-      "commit_frequency": 1.9,
-      "recent_releases_count": 24,
-      "updated_issues_count": 1,
-      "closed_issues_count": 1,
-      "comment_frequency": 0.0,
-      "dependents_count": 0,
-      "criticality_score": 0.17646
-    },
-    {
       "name": "llm-transpile",
       "url": "https://github.com/epicsagas/llm-transpile",
       "language": "HTML",
@@ -69,12 +57,12 @@
       "watchers_count": 5,
       "org_count": 1,
       "commit_frequency": 3.3,
-      "recent_releases_count": 17,
+      "recent_releases_count": 16,
       "updated_issues_count": 0,
       "closed_issues_count": 0,
       "comment_frequency": 0,
       "dependents_count": 0,
-      "criticality_score": 0.17479
+      "criticality_score": 0.17377
     },
     {
       "name": "Episteme",
@@ -249,12 +237,12 @@
       "watchers_count": 10,
       "org_count": 1,
       "commit_frequency": 2.0,
-      "recent_releases_count": 4,
+      "recent_releases_count": 3,
       "updated_issues_count": 0,
       "closed_issues_count": 0,
       "comment_frequency": 0,
       "dependents_count": 0,
-      "criticality_score": 0.12174
+      "criticality_score": 0.11775
     },
     {
       "name": "korean-postalcode",
