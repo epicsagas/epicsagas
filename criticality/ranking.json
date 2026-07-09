@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-09 15:54 UTC",
+  "generated_at": "2026-07-09 16:03 UTC",
   "org": "epicsagas",
   "count": 32,
   "failed": [
     {
       "name": "epicsagas",
       "url": "https://github.com/epicsagas/epicsagas",
-      "error": "Command '['criticality_score', '--repo', 'https://github.com/epicsagas/epicsagas', '--format', 'json']' timed out after "
+      "error": "Command '['/tmp/crit_venv/bin/criticality_score', '--repo', 'https://github.com/epicsagas/epicsagas', '--format', 'json'"
     }
   ],
   "repos": [
@@ -57,12 +57,12 @@
       "watchers_count": 5,
       "org_count": 1,
       "commit_frequency": 3.3,
-      "recent_releases_count": 16,
+      "recent_releases_count": 17,
       "updated_issues_count": 0,
       "closed_issues_count": 0,
       "comment_frequency": 0,
       "dependents_count": 0,
-      "criticality_score": 0.17377
+      "criticality_score": 0.17479
     },
     {
       "name": "Episteme",
@@ -237,12 +237,12 @@
       "watchers_count": 10,
       "org_count": 1,
       "commit_frequency": 2.0,
-      "recent_releases_count": 3,
+      "recent_releases_count": 4,
       "updated_issues_count": 0,
       "closed_issues_count": 0,
       "comment_frequency": 0,
       "dependents_count": 0,
-      "criticality_score": 0.11775
+      "criticality_score": 0.12174
     },
     {
       "name": "korean-postalcode",

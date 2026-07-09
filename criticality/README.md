@@ -1,8 +1,8 @@
 # OpenSSF Criticality Score
 
-> `epicsagas` 계정의 공개 레포(fork · archived 제외) OpenSSF criticality score. GitHub Actions가 매주 갱신합니다.
+> OpenSSF criticality scores for `epicsagas` public repos (forks and archived excluded). Updated weekly by GitHub Actions.
 
-**갱신 시각:** 2026-07-09 15:54 UTC · **대상 레포:** 32개
+**Updated:** 2026-07-09 16:03 UTC · **Repos:** 32
 
 ## Top 5
 
@@ -10,17 +10,17 @@
 |---|-------|------|-------|--------------|-----------|----------|
 | 1 | **0.20702** | [epic-harness](https://github.com/epicsagas/epic-harness) | 11 | 3 | 10.7 | 43 |
 | 2 | **0.20170** | [alcove](https://github.com/epicsagas/alcove) | 14 | 2 | 8.9 | 38 |
-| 3 | **0.17377** | [llm-transpile](https://github.com/epicsagas/llm-transpile) | 5 | 2 | 3.3 | 16 |
+| 3 | **0.17479** | [llm-transpile](https://github.com/epicsagas/llm-transpile) | 5 | 2 | 3.3 | 17 |
 | 4 | **0.16830** | [Episteme](https://github.com/epicsagas/Episteme) | 4 | 2 | 5.8 | 11 |
 | 5 | **0.16602** | [claudy](https://github.com/epicsagas/claudy) | 2 | 2 | 3.4 | 15 |
 
-<details><summary>전체 순위 펼치기</summary>
+<details><summary>Full ranking</summary>
 
 | # | score | repo | stars | contributors | commits/wk | age(mo) | releases |
 |---|-------|------|-------|--------------|-----------|---------|----------|
 | 1 | 0.20702 | [epic-harness](https://github.com/epicsagas/epic-harness) | 11 | 3 | 10.7 | 3 | 43 |
 | 2 | 0.20170 | [alcove](https://github.com/epicsagas/alcove) | 14 | 2 | 8.9 | 4 | 38 |
-| 3 | 0.17377 | [llm-transpile](https://github.com/epicsagas/llm-transpile) | 5 | 2 | 3.3 | 3 | 16 |
+| 3 | 0.17479 | [llm-transpile](https://github.com/epicsagas/llm-transpile) | 5 | 2 | 3.3 | 3 | 17 |
 | 4 | 0.16830 | [Episteme](https://github.com/epicsagas/Episteme) | 4 | 2 | 5.8 | 2 | 11 |
 | 5 | 0.16602 | [claudy](https://github.com/epicsagas/claudy) | 2 | 2 | 3.4 | 2 | 15 |
 | 6 | 0.16304 | [obsidian-forge](https://github.com/epicsagas/obsidian-forge) | 2 | 2 | 2.8 | 4 | 19 |
@@ -30,7 +30,7 @@
 | 10 | 0.14477 | [vortex.nvim](https://github.com/epicsagas/vortex.nvim) | 2 | 1 | 0.4 | 8 | 5 |
 | 11 | 0.13874 | [Velith](https://github.com/epicsagas/Velith) | 23 | 1 | 1.8 | 2 | 9 |
 | 12 | 0.12756 | [epic-rag-agent](https://github.com/epicsagas/epic-rag-agent) | 1 | 1 | 0.9 | 8 | 0 |
-| 13 | 0.11775 | [tdl](https://github.com/epicsagas/tdl) | 10 | 2 | 2.0 | 2 | 3 |
+| 13 | 0.12174 | [tdl](https://github.com/epicsagas/tdl) | 10 | 2 | 2.0 | 2 | 4 |
 | 14 | 0.10219 | [korean-postalcode](https://github.com/epicsagas/korean-postalcode) | 1 | 2 | 0.2 | 8 | 6 |
 | 15 | 0.10061 | [korean-geocode](https://github.com/epicsagas/korean-geocode) | 1 | 1 | 0.2 | 8 | 11 |
 | 16 | 0.09809 | [plugins](https://github.com/epicsagas/plugins) | 2 | 1 | 0.9 | 3 | 0 |
@@ -53,10 +53,10 @@
 
 </details>
 
-## 참고
+## Notes
 
-- 점수는 0~1 범위이며 star 외에 기여자 수 · 커밋 빈도 · release · 이슈 활동 · 의존도 등을 종합합니다.
-- `dependents_count`가 현재 0으로 측정되어 점수를 낮추는 주요인입니다.
-- `_(meta)_` 표시는 org profile 메타데이터 레포로 실제 프로젝트가 아닙니다.
-- 사용 도구: [`ossf/criticality_score`](https://github.com/ossf/criticality_score) Python 버전(공식 deprecated, Go 버전 권장).
-- 전체 기계 판독용 데이터: [`ranking.json`](./ranking.json)
+- Scores range 0–1 and weigh contributor count, commit frequency, releases, issue activity, and dependents in addition to stars.
+- `dependents_count` currently reads as 0 — the main factor keeping scores low.
+- `_(meta)_` marks the account profile metadata repo, not a real project.
+- Tool: [`ossf/criticality_score`](https://github.com/ossf/criticality_score) Python version (officially deprecated; Go version recommended).
+- Machine-readable data: [`ranking.json`](./ranking.json)

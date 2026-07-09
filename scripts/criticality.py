@@ -53,7 +53,7 @@ def score(url, token):
     try:
         out = subprocess.run(
             [CRIT_BIN, "--repo", url, "--format", "json"],
-            capture_output=True, text=True, timeout=120, env=env,
+            capture_output=True, text=True, timeout=180, env=env,
         )
         txt = (out.stdout or "") + (out.stderr or "")
         start = txt.find("{")
@@ -76,10 +76,10 @@ def write_readme(path, records, generated_at, total):
     lines = [
         "# OpenSSF Criticality Score",
         "",
-        f"> `{ORG}` 계정의 공개 레포(fork · archived 제외) OpenSSF criticality score. "
-        "GitHub Actions가 매주 갱신합니다.",
+        f"> OpenSSF criticality scores for `{ORG}` public repos (forks and archived excluded). "
+        "Updated weekly by GitHub Actions.",
         "",
-        f"**갱신 시각:** {generated_at} · **대상 레포:** {total}개",
+        f"**Updated:** {generated_at} · **Repos:** {total}",
         "",
         "## Top 5",
         "",
@@ -97,7 +97,7 @@ def write_readme(path, records, generated_at, total):
 
     lines += [
         "",
-        "<details><summary>전체 순위 펼치기</summary>",
+        "<details><summary>Full ranking</summary>",
         "",
         "| # | score | repo | stars | contributors | commits/wk | age(mo) | releases |",
         "|---|-------|------|-------|--------------|-----------|---------|----------|",
@@ -113,13 +113,13 @@ def write_readme(path, records, generated_at, total):
     lines += ["", "</details>", ""]
 
     lines += [
-        "## 참고",
+        "## Notes",
         "",
-        "- 점수는 0~1 범위이며 star 외에 기여자 수 · 커밋 빈도 · release · 이슈 활동 · 의존도 등을 종합합니다.",
-        "- `dependents_count`가 현재 0으로 측정되어 점수를 낮추는 주요인입니다.",
-        "- `_(meta)_` 표시는 org profile 메타데이터 레포로 실제 프로젝트가 아닙니다.",
-        "- 사용 도구: [`ossf/criticality_score`](https://github.com/ossf/criticality_score) Python 버전(공식 deprecated, Go 버전 권장).",
-        "- 전체 기계 판독용 데이터: [`ranking.json`](./ranking.json)",
+        "- Scores range 0–1 and weigh contributor count, commit frequency, releases, issue activity, and dependents in addition to stars.",
+        "- `dependents_count` currently reads as 0 — the main factor keeping scores low.",
+        "- `_(meta)_` marks the account profile metadata repo, not a real project.",
+        "- Tool: [`ossf/criticality_score`](https://github.com/ossf/criticality_score) Python version (officially deprecated; Go version recommended).",
+        "- Machine-readable data: [`ranking.json`](./ranking.json)",
         "",
     ]
     with open(path, "w") as f:
