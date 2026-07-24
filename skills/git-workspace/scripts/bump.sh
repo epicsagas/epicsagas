@@ -85,6 +85,24 @@ bump_version() {
 
   echo -e "${cyan}$name${reset}  $old_version → ${green}$new_version${reset}  ($bump_type)"
 
+  # Rust repos: the release tooling (cargo-dist) rejects a tag whose version
+  # does not match Cargo.toml, so bump the manifest and commit a release
+  # commit BEFORE tagging. Tagging without this produced a failed release
+  # (claudy v0.6.0, 2026-07-24). Non-Rust repos skip this block unchanged.
+  if [ -f "$repo/Cargo.toml" ]; then
+    local plain_version="${major}.${minor}.${patch}"
+    if grep -qE '^version = "' "$repo/Cargo.toml"; then
+      # Bump only the first (package) version line.
+      perl -pi -e 'if (!$done && s/^version = "[^"]+"/version = "'"$plain_version"'"/) { $done = 1 }' "$repo/Cargo.toml"
+      # Refresh Cargo.lock so the workspace member entry matches.
+      (cd "$repo" && cargo update --workspace --quiet 2>/dev/null || cargo check --quiet 2>/dev/null || true)
+      git -C "$repo" add Cargo.toml
+      [ -f "$repo/Cargo.lock" ] && git -C "$repo" add Cargo.lock
+      git -C "$repo" commit -m "release: $new_version" 2>&1 | sed 's/^/    /'
+      git -C "$repo" push origin HEAD 2>&1 | sed 's/^/    /'
+    fi
+  fi
+
   # Tag
   git -C "$repo" tag "$new_version"
 
