@@ -41,6 +41,24 @@ Born from `introspect` analysis — individual skills targeting specific cogniti
 |-------|-------------|----------|
 | **skill-optimize** | SkillOpt pipeline — optimizes skill documents through trajectory-driven edits, validation-gated updates | "optimize skill", "SkillOpt", "skill training", "improve this skill" |
 
+### Writing — Korean (윤문)
+
+A staged Korean prose-polishing suite. `korean-polish` orchestrates the five
+specialists top-down (verbosity → translationese → register → norm-lint →
+cohesion) under a meaning-preserving contract (math, numbers, citations, and
+defined terms are frozen). Grounded in 국립국어원 어문규범 and translationese
+research; tuned for academic/technical Korean and English→Korean translations.
+Shared reference packs live in `korean-polish/references/`.
+
+| Skill | Description | Triggers |
+|-------|-------------|----------|
+| **korean-polish** | Orchestrator — staged 윤문 pass with term glossary, intensity dial, and a meaning-preserving diff report | "윤문", "한국어 다듬어", "번역투 고쳐", "polish Korean" |
+| **korean-translationese** | English→Korean interference: 무생물 주어, we/우리, ~의 그것, 피동·이중피동, have/there-is/사동, 숙어, 하나의, 무정물 ~들 | "번역투", "번역체 고쳐", "직역투", "translationese" |
+| **korean-verbosity** | 만연체 splitting, 명사화→동사화, 겹말 removal | "만연체", "문장 분할", "간결하게", "명사화 풀어" |
+| **korean-register** | Academic 서술체·시제, 구어체 removal, one-term-per-concept | "학술 문체", "용어 일관성", "구어체 고쳐", "논문체" |
+| **korean-norm-lint** | Deterministic 어문규범: 띄어쓰기·조사·문장부호·맞춤법 | "띄어쓰기", "맞춤법", "어문규범", "문장부호" |
+| **korean-cohesion** | 주술 호응, 지시어·접속부사 남용, 병렬 | "호응", "지시어 남용", "접속부사", "병렬" |
+
 ## Install
 
 ```bash

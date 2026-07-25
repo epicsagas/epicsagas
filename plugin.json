@@ -1,7 +1,7 @@
 {
   "name": "epicsagas",
-  "version": "0.4.0",
-  "description": "Personal skill collection — problem discovery, cognitive audit, corrective routines, OSS distribution readiness, and git workspace management.",
+  "version": "0.5.0",
+  "description": "Personal skill collection — problem discovery, cognitive audit, corrective routines, OSS distribution readiness, git workspace management, and Korean prose polishing (윤문).",
   "author": {
     "name": "epicsagas",
     "url": "https://github.com/epicsagas"
@@ -14,7 +14,10 @@
     "problem-discovery",
     "cognitive-audit",
     "oss",
-    "skill-optimization"
+    "skill-optimization",
+    "korean-writing",
+    "yunmun",
+    "proofreading"
   ],
   "skills": "./skills/"
 }
