@@ -61,7 +61,7 @@ Split 만연체 (45+ 어절 or 4+ commas), turn nominalizations back into verbs,
 Run the §1 translationese passes. Detect → suggest → confirm.
 
 ### Stage 4 — Register + terminology (korean-register)
-Enforce 서술체·시제, strip 구어체/담화표지, and check every glossary term for variant spellings.
+Retarget to native academic register (foundational): lower the speaker (본 논문은 → 본고에서는), demote field/inanimate subjects (모형은 가정한다 → 모형에서는 …라고 가정한다; 결과는 보여준다 → 분석 결과 …로 나타난다), close results/implications with field idioms, and pick register by field (economics 한자어 vs CS 외래어; see `references/native-academic-register.md`). Then enforce 서술체·시제, strip 구어체/담화표지, and check every glossary term for variant spellings.
 
 ### Stage 5 — Norms (korean-norm-lint)
 띄어쓰기, 조사 호응 (로써/로서, 에/에게, 와/과), 문장부호 (콜론·세미콜론→마침표, 강조 작은따옴표), 맞춤법. Deterministic → near-automatic.

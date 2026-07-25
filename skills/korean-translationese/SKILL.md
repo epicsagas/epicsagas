@@ -13,6 +13,7 @@ legitimate — so it always suggests with a diff and reason code, never auto-rep
 
 Full candidate tables: `../korean-polish/references/translationese-table.md`.
 Regex detection: `../korean-polish/references/regex-pack.md` (번역투 block).
+Native forms (분야/무생물 주어 강등, ~의 그것, we): `../korean-polish/references/native-academic-register.md`.
 
 ## When to Trigger
 

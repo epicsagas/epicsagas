@@ -1,6 +1,6 @@
 ---
 name: korean-register
-description: "Normalizes Korean academic register and terminology: enforces plain declarative 서술체 (~이다/~한다), strips 구어체/honorifics/담화표지 (되게, 좀, 아무튼), fixes tense (general statements → present, will-padding removed), and enforces one-term-per-concept against a glossary. Triggers on: '학술 문체', '격식', '문체 통일', '용어 일관성', '구어체 고쳐', 'academic tone', 'terminology consistency', '논문체'."
+description: "Normalizes Korean academic register to how Korean scholars actually write (grounded in real 경제학/CS journal conventions): lowers the speaker (본 논문은 → 본고에서는), demotes field/inanimate subjects (모형은 가정한다 → 이 모형에서는 …라고 가정한다; 결과는 보여준다 → 분석 결과 …로 나타난다), closes results/implications with field idioms (~로 나타났다/~을 보인다/~할 필요가 있다), enforces plain 서술체 and one-term-per-concept, and picks register by field (economics 한자어 vs CS 외래어). Triggers on: '학술 문체', '네이티브 한국어', '한국인이 쓴 것처럼', '격식', '문체 통일', '용어 일관성', 'academic tone', 'native Korean', '논문체'."
 ---
 
 # korean-register — 학술 문체·용어 일관성
@@ -11,6 +11,7 @@ visible defects in translated academic Korean. This skill enforces both.
 
 Term map: `../korean-polish/references/economics-glossary.md`.
 Connective/register sets: `../korean-polish/references/academic-connectives.md`.
+Native academic register (한국 논문 실제 관행, 경제학/CS 대조): `../korean-polish/references/native-academic-register.md`.
 
 ## When to Trigger
 
@@ -27,6 +28,15 @@ Connective/register sets: `../korean-polish/references/academic-connectives.md`.
 5. **Answer in Korean** unless the user writes in English.
 
 ## Process
+
+### Pass A0 — Native academic register (foundational, 한국 논문 실제 관행)
+Run first. The strongest "translated" tell is discourse-level, not lexical.
+Retarget the prose to how Korean scholars actually write (full contrastive tables:
+`../korean-polish/references/native-academic-register.md`):
+- **Speaker**: `본 논문은/본 모델은 ~한다` (English "This paper…" as an agent) → `본고에서는/이 논문에서는 ~한다`, or drop the subject. Don't repeatedly stage the paper/model/section as an actor.
+- **Field/inanimate subjects (highest value)**: `모형은 가정한다` → `이 모형에서는 …라고 가정한다`; `결과는/표 N은 …을 보여준다` → `분석 결과 …로 나타난다 / 표 N에서 보듯`; `산업경제학은 …모델링한다` → `산업경제학에서 …은 …모델링된다`. Demote the field to an adverbial background; state results impersonally.
+- **Result/implication endings**: results → `~로 나타났다/추정된다/유의하다`; implications → `~할 필요가 있다/~을 시사한다`.
+- **Field register**: economics → 한자어 개념어 (강건성·내생성·상충관계·후생; 프레임워크→분석틀, 프리미티브→기본 요소); CS → keep 외래어 (프레임워크·토큰·컨텍스트·에이전트). Don't over-purify CS terms.
 
 ### Pass A — 종결체·구어체
 - Enforce plain declarative (`~이다/~한다`). Flag 경어체 (`~합니다/~습니다/~네요/~죠`).

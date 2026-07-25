@@ -46,8 +46,10 @@ Born from `introspect` analysis — individual skills targeting specific cogniti
 A staged Korean prose-polishing suite. `korean-polish` orchestrates the five
 specialists top-down (verbosity → translationese → register → norm-lint →
 cohesion) under a meaning-preserving contract (math, numbers, citations, and
-defined terms are frozen). Grounded in 국립국어원 어문규범 and translationese
-research; tuned for academic/technical Korean and English→Korean translations.
+defined terms are frozen). Grounded in 국립국어원 어문규범, translationese
+research, and **real Korean 경제학/CS journal conventions** (the register stage
+retargets prose to native academic register — 화자 표지, 분야 주어 강등, field-specific
+한자어/외래어); tuned for academic/technical Korean and English→Korean translations.
 Shared reference packs live in `korean-polish/references/`.
 
 | Skill | Description | Triggers |
