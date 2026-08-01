@@ -32,6 +32,15 @@ port. Use a refactor skill instead. A port changes the language, not the design.
 | **A — Draft** | Faithful logic + idiom in T | No | The diff reader (`.src` ↔ `.t`) |
 | **B — Compile** | Type-checks, links, tests pass | Yes | The compiler + tests |
 
+> **For interpreted / dynamically-typed T (Python, Ruby, PHP, JS, TS):** there
+> is no compile step. Redefine the phases — **Phase A** = logic-faithful draft
+> that *runs* under the interpreter; **Phase B** = the type-checker passes
+> (`mypy`/`pyright`/`tsc`/`phpstan`/`psalm`/`sorbet`) **and** the test suite
+> passes **and** the linter is clean. "Compiles?" → "type-checks + tests pass".
+> The two-phase discipline still holds: Phase A optimizes for the diff reader,
+> Phase B for the toolchain. Each per-language reference for a dynamic language
+> repeats this redefinition.
+
 Never do both at once. A draft that fights the borrow checker / type system
 while you are still translating logic produces both a wrong port *and* a slow
 one. Get the logic down, mark uncertainty, then make it compile.
@@ -88,6 +97,12 @@ declaration syntax:
 - If S uses a region/arena/pool that is bulk-freed → keep that model in T if T
   supports it (bump arena, arena allocator); otherwise owned + `// PERF(port)`.
 
+> If T is a tracing-GC language (Go/Java/Python/JS/Ruby/PHP), this whole axis
+> mostly collapses: owned/borrowed/static all become ordinary references, and
+> every `free`/`delete` in S is deleted. The only decisions that remain are
+> *cycles* (re-check every cycle S broke with a weak ref — GC collects cycles
+> differently) and *shared-mutation* (which references are mutated from >1 site).
+
 **Prerequisite:** if T's default allocator differs from S's and the code is
 allocator-sensitive (custom allocators, placement, alignment assumptions),
 note it. Phase A can assume the global allocator; Phase B verifies.
@@ -132,6 +147,9 @@ Map the *model*, not the syntax. This is the highest-bug-rate axis:
   is not free — capture scheduling assumptions.
 - S lock-free atomics → T atomics with the **same memory ordering**. If S
   relied on relaxed/acquire/release semantics, T must match exactly.
+- **GIL boundaries:** if S is Python (CPython GIL), Ruby (MRI GIL), or another
+  GIL'd language, locks that were *unnecessary* under the GIL become necessary
+  in a free-threaded T (Go/Rust/Java/JRuby). Capture every shared-mutable site.
 
 ### Generics & metaprogramming
 
@@ -149,14 +167,15 @@ Map the *model*, not the syntax. This is the highest-bug-rate axis:
 ### Idiom mapping
 
 For each S idiom, ask: *what is the closest T idiom with the same behavior and
-roughly the same cost?* Apply the **defer/cleanup rule** and **borrow rule**
-below — they generalize across most languages:
+roughly the same cost?* Apply the **defer/cleanup rule**, **borrow rule**, and
+**numeric-cast rule** below — they generalize across most languages:
 
 - **Cleanup / `defer` / RAII:** if S uses `defer x.release()` / finally /
   destructor, map to T's scope-exit mechanism (RAII `Drop`, `using`/`IDisposable`,
-  `try`-with-resources, `defer`-like, `contextlib`). Do not hand-roll a cleanup
-  flag unless T lacks the mechanism. Where S has out-of-order cleanup (cleanup
-  order ≠ declaration order) and it matters, keep explicit and `// PORT NOTE`.
+  `try`-with-resources, `defer`-like, `contextlib`, PHP `try/finally`). Do not
+  hand-roll a cleanup flag unless T lacks the mechanism. Where S has out-of-order
+  cleanup (cleanup order ≠ declaration order) and it matters, keep explicit and
+  `// PORT NOTE`.
 - **Borrow / aliasing constraints:** when matching S flow yields overlapping
   mutable aliases that T forbids (Rust borrow checker, single-ownership rule,
   Swift exclusivity), capture the needed scalar (length, index, copy) into a
@@ -165,9 +184,11 @@ below — they generalize across most languages:
   the aliasing the checker was warning about. Leave `// PORT NOTE: reshaped for
   aliasing`.
 - **Numeric casts:** S narrowing cast that can overflow → T's *checked* cast
-  (panic/Result on overflow), not a silent wrap, unless S itself wrapped
-  (`as`/truncating). Match wrap-vs-check semantics exactly. Reserve silent
-  truncation for where S explicitly truncated.
+  (the one that traps/errors on overflow — Rust `try_from`, Go's checked helper,
+  `int?(x)` in C#, `int(x)` raise-on-overflow in Python), **not** a silent wrap,
+  unless S itself wrapped/truncated. Match wrap-vs-check semantics exactly.
+  Reserve silent truncation (`as` / `& mask` / `Math.trunc` / modulo) for where
+  S explicitly truncated.
 
 ## Naming conversion
 
@@ -200,7 +221,9 @@ Common rules (apply T's, consistently):
 - Generated files (`*_generated.*`, large tables) → write a 3-line stub:
   `// GENERATED: re-run <generator> with <T> output`.
 - Test blocks → T's test module (`#[cfg(test)]`, `func TestX(t *testing.T)`,
-  `describe`/`it`, `def test_`). Preserve test names.
+  `describe`/`it`, `def test_`). Preserve test names. **Draft them in Phase A**
+  alongside the code — a ported test that passes against the draft is the
+  fastest logic check and a Phase B acceptance gate.
 - Build configuration / project files → out of scope for a single-file port;
   flag for Phase B.
 
@@ -211,12 +234,12 @@ load the matching per-language note from `references/` for the specific traps:
 
 | Axis | Diverges hardest between |
 |------|--------------------------|
-| **Memory** — manual / GC / ownership+borrow / RC | C/C++ ↔ Rust ↔ Go/Java/Python |
-| **Error** — exceptions / typed values / codes | Python/Java ↔ Rust/Go/Haskell |
-| **Null** — nullable refs / Option / nil-everything | Java/C# ↔ Rust/Kotlin/Swift ↔ Go |
-| **Concurrency** — OS threads / async-await / green threads / actors | Go ↔ Rust ↔ Node/Python ↔ Erlang |
-| **Typing** — nominal / structural / dynamic / gradual | Java/Rust ↔ TS/Go(structural iface) ↔ Python/Ruby |
-| **Metaprogramming** — templates / macros / reflection / decorators | C++/Zig ↔ Rust ↔ Java ↔ Python |
+| **Memory** — manual / GC / ownership+borrow / RC(ARC) | C/C++ ↔ Rust ↔ Go/Java/Python ↔ Swift |
+| **Error** — exceptions / typed values / codes | Python/Ruby/PHP/Java ↔ Rust/Go/Haskell |
+| **Null** — nullable refs / Option / nil-everything / unchecked | Java/C#/PHP ↔ Rust/Kotlin/Swift ↔ Go/Python/Ruby |
+| **Concurrency** — OS threads / async-await / green threads / actors / GIL | Go ↔ Rust ↔ Node/Python ↔ Erlang ↔ CPython/MRI |
+| **Typing** — nominal / structural / dynamic / gradual | Java/Rust/Swift ↔ TS/Go(structural iface) ↔ Python/Ruby ↔ PHP/TS |
+| **Metaprogramming** — templates / macros / reflection / decorators | C++/Zig ↔ Rust ↔ Java ↔ Python/Ruby |
 
 Reference files (load the one for **each** of S and T):
 
@@ -227,11 +250,40 @@ Reference files (load the one for **each** of S and T):
 - [`references/typescript.md`](references/typescript.md) — structural types, unions, narrowing, async
 - [`references/jvm.md`](references/jvm.md) — checked exceptions, nullables, streams (Java + Kotlin)
 - [`references/csharp.md`](references/csharp.md) — nullable refs, `IDisposable`, LINQ, async/await
+- [`references/swift.md`](references/swift.md) — ARC, value vs reference types, optionals, protocols, structured concurrency
+- [`references/ruby.md`](references/ruby.md) — duck typing, blocks/`Proc`, modules-as-mixins, MRI GIL, metaprogramming
+- [`references/php.md`](references/php.md) — gradual typing & `strict_types`, array-as-ordered-map, shared-nothing request lifecycle
 - [`references/zig.md`](references/zig.md) — `comptime`, explicit allocators, tagged unions, error sets
+
+**Don't load all of them.** Loading is the biggest token cost of this skill.
+Rule: classify S and T on the axis table, then load **only** the reference(s)
+for the axis that diverges *most* for this particular file. Most ports need
+0–1 references — the methodology above covers the rest. Load two only when
+memory + error + null all diverge sharply (e.g. C → Rust). Each dynamic-language
+reference repeats the Phase A/B redefinition, so you don't need this file for it.
 
 If neither S nor T is listed, the methodology above still applies — fall back
 to the axis table and your knowledge of both languages, and add a per-language
 note if the port repeats.
+
+## Frequent port pairs (cross-shock map)
+
+Some pairings are common enough that their single biggest shock is worth knowing
+up front. This is *not* exhaustive — the per-language references carry the
+detail. Use it to pick which reference to load.
+
+| Pair | Biggest single shock |
+|------|----------------------|
+| C/C++ → Rust | manual memory → ownership+borrow; UB → safe defaults; templates → traits |
+| Zig → Rust | explicit allocator → ownership; error sets → `Result`; `comptime` → generics |
+| Python → Rust | GIL gone → `Send`/`Sync`; dynamic → static types; exceptions → `Result` |
+| Python ↔ Go | GIL vs goroutines; duck typing vs interfaces; exceptions vs error-values |
+| Java/Kotlin → Go | inheritance → composition+interfaces; checked exceptions → error-values |
+| Swift ↔ Kotlin | iOS ↔ Android cross-port; ARC ↔ JVM GC; `Optional` ↔ nullable, near 1:1 |
+| Ruby/PHP → Python | dynamic, near 1:1; blocks/`&.` ↔ iterators; `array`(ordered map) ↔ dict/list split |
+| TS ↔ JS | same runtime; types are erased; port is mostly type-aware syntax |
+| TS ↔ Python | structural ↔ duck typing; union types ↔ runtime checks; `null`/`undefined` ↔ `None` |
+| PHP → Go/TS | shared-nothing request lifecycle → long-lived server state; array → slice/map |
 
 ## Output format
 
@@ -258,6 +310,7 @@ Count `TODO(port)` markers for `todos`. The trailer is the Phase B entry point.
 1. Wire the module into T's build (manifest/package/import).
 2. Resolve imports and the external-dependency `TODO(port)`s.
 3. Make it type-check, fixing only what the compiler demands — do not refactor.
-4. For each `PERF(port)`, decide (with a benchmark) whether to restore the S idiom.
-5. Add/restore tests mirroring the source's tests.
+   (For interpreted T: make the type-checker — `mypy`/`tsc`/`phpstan`/etc. — pass.)
+4. Run the tests you drafted in Phase A; fix logic, not design.
+5. For each `PERF(port)`, decide (with a benchmark) whether to restore the S idiom.
 6. Re-read any `low` confidence file against the source before declaring done.

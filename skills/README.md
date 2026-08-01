@@ -34,7 +34,7 @@ Born from `introspect` analysis — individual skills targeting specific cogniti
 | Skill | Description | Triggers |
 |-------|-------------|----------|
 | **git-workspace** | Git workspace manager — sync repos, bump versions, project health dashboard. Works in submodule monorepos, flat multi-repo, and single projects. | "sync repos", "pull all", "bump version", "git tags", "overview", "dashboard", "project status" |
-| **code-port** | Cross-language file porting — a faithful draft (Phase A, need-not-compile) then compile-by-module (Phase B). Preserves structure, infers ownership/error/concurrency mappings, marks every uncertain spot. Per-language pitfall references (Rust, Go, C/C++, Python, TypeScript, JVM, C#, Zig). | "port X to Rust/Go/TS", "rewrite <lang> in <lang>", "migrate to <lang>", 포팅, 변환 |
+| **code-port** | Cross-language file porting — a faithful draft (Phase A, need-not-compile) then compile-by-module (Phase B). Preserves structure, infers ownership/error/concurrency mappings, marks every uncertain spot. Per-language pitfall references (Rust, Go, C/C++, Python, TypeScript, JVM, C#, Swift, Ruby, PHP, Zig) + a cross-shock pair map. | "port X to Rust/Go/TS", "rewrite <lang> in <lang>", "migrate to <lang>", 포팅, 변환 |
 
 ### Experimental
 

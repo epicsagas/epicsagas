@@ -70,3 +70,11 @@
 | checked exception | throw (unchecked) or `Result` lib | No `throws` in type signature |
 | operator overloading | not supported | Use named methods |
 | `void*` / any | `unknown` then narrow | Avoid `any`; it opts out of checking |
+
+## Phase A/B redefinition (TS is interpreted, types erased)
+
+There is no compile step at runtime — `tsc` erases types to JS. **Phase A** =
+logic-faithful draft that *runs* under Node/a bundler (`tsc --noEmit` need not
+pass). **Phase B** = `tsc`/`tsc --noEmit` type-checks **and** the test suite
+(vitest/jest) passes **and** `eslint`/`biome` lint is clean. "Compiles?" becomes
+"type-checks + tests pass".

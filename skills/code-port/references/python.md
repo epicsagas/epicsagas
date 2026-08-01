@@ -71,3 +71,10 @@
 | switch/match | `match` (3.10+) or `if/elif` | Structural matching in 3.10+ |
 | struct/record | `@dataclass` | Mutable by default; `frozen=True` for value type |
 | async runtime | `asyncio` | Single-threaded; GIL still blocks CPU parallelism |
+
+## Phase A/B redefinition (Python is interpreted)
+
+There is no compile step. **Phase A** = logic-faithful draft that *runs* under
+CPython. **Phase B** = `mypy`/`pyright` passes (type-check) **and** the test
+suite (pytest/unittest) passes **and** `ruff`/flake8 lint is clean. "Compiles?"
+becomes "type-checks + tests pass".
