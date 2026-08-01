@@ -3,6 +3,11 @@
 All notable changes to this project are documented in this file.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.6.2] - 2026-08-02
+
+### Added
+- **code-port: worked examples** — `examples/py2rs/` (Python→Rust word counter; `rustc` compiles, Python↔Rust output byte-identical) and `examples/go2ts/` (Go→TypeScript concurrent fetcher; `tsc --strict` passes). Each ships source + Phase-A draft + a README mapping every construct to its axis decision. Linked from a new "Worked examples" section in SKILL.md.
+
 ## [0.6.1] - 2026-08-02
 
 ### Added
@@ -31,6 +36,7 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 - `git-workspace bump`: Rust 저장소는 태깅 전 `Cargo.toml` 버전을 먼저 올리고 릴리즈 커밋을 남기도록 수정 — 버전 불일치로 인한 cargo-dist 릴리즈 실패(claudy v0.6.0, 2026-07-24) 재발 방지
 - `criticality` 워크플로: 출력을 영어로 통일, rate-limit 대기용 저장소별 타임아웃 상향
 
+[0.6.2]: https://github.com/epicsagas/epicsagas/releases/tag/v0.6.2
 [0.6.1]: https://github.com/epicsagas/epicsagas/releases/tag/v0.6.1
 [0.6.0]: https://github.com/epicsagas/epicsagas/releases/tag/v0.6.0
 [0.5.0]: https://github.com/epicsagas/epicsagas/releases/tag/v0.5.0

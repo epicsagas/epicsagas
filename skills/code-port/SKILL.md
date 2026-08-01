@@ -285,6 +285,18 @@ detail. Use it to pick which reference to load.
 | TS ↔ Python | structural ↔ duck typing; union types ↔ runtime checks; `null`/`undefined` ↔ `None` |
 | PHP → Go/TS | shared-nothing request lifecycle → long-lived server state; array → slice/map |
 
+## Worked examples
+
+End-to-end ports in `examples/` — source + Phase-A draft + a README mapping
+each construct to the axis decisions above. Read one before your first real port:
+
+- [`examples/py2rs/`](examples/py2rs/README.md) — Python → Rust word counter.
+  GC→ownership, exceptions→`Result`, dict→`HashMap`+entry. **`rustc` compiles;
+  Python↔Rust output byte-identical.**
+- [`examples/go2ts/`](examples/go2ts/README.md) — Go → TypeScript concurrent
+  fetcher. nominal→structural interface, error-value→throw (aggregation kept as
+  value), goroutine→`Promise.all`. **`tsc --strict` passes.**
+
 ## Output format
 
 End the target file with a trailer comment (comment syntax of T):
