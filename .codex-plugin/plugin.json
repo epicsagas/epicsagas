@@ -1,7 +1,7 @@
 {
   "name": "epicsagas",
-  "version": "0.5.1",
-  "description": "Personal skill collection — problem discovery, cognitive audit, corrective routines, OSS distribution readiness, and Korean prose polishing (윤문).",
+  "version": "0.6.0",
+  "description": "Personal skill collection — problem discovery, cognitive audit, corrective routines, OSS distribution readiness, git workspace management, Korean prose polishing (윤문), and cross-language code porting.",
   "author": {
     "name": "epicsagas",
     "url": "https://github.com/epicsagas"
@@ -14,14 +14,17 @@
     "problem-discovery",
     "cognitive-audit",
     "oss",
+    "skill-optimization",
     "korean-writing",
-    "proofreading"
+    "yunmun",
+    "proofreading",
+    "code-porting"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Epicsagas Skills",
-    "shortDescription": "Personal skill collection — problem discovery, cognitive audit, OSS distribution.",
-    "longDescription": "Curated skills for personal and team use: problem discovery (5 Whys, JTBD, Fishbone), cognitive audit (bias detection, thinking pattern analysis), and OSS distribution readiness (release pipeline, README, i18n, security).",
+    "shortDescription": "Personal skill collection — problem discovery, cognitive audit, OSS distribution, code porting.",
+    "longDescription": "Curated skills for personal and team use: problem discovery (5 Whys, JTBD, Fishbone), cognitive audit (bias detection, thinking pattern analysis), OSS distribution readiness (release pipeline, README, i18n, security), and cross-language code porting (faithful two-phase file translation with per-language pitfall references).",
     "developerName": "epicsagas",
     "category": "Skills",
     "capabilities": ["Read"],
