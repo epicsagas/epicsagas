@@ -17,61 +17,29 @@ Commerce · Regulated Fintech · Crypto · Security on AWS/GCP
 
 Based in **Seoul**.
 
-## 🧩 Agent Skills
 
-Personal agent skill collection for AI coding agents — problem discovery, cognitive self-analysis, corrective routines, and OSS distribution readiness.
-
-→ **Full catalog & install guide:** [skills/README.md](skills/README.md)
-
-<!-- 현재 작업 중인 것 -->
-
+<p align="center">
+  <a href="https://github.com/epicsagas?tab=followers"><img src="https://img.shields.io/github/followers/epicsagas?style=for-the-badge&logo=github&color=7AA2F7&labelColor=1A1B27" alt="followers"></a>
+  <img src="https://komarev.com/ghpvc/?username=epicsagas&style=for-the-badge&color=7DCFFF&label=VIEWS&labelColor=1A1B27" alt="views">
+  <img src="https://img.shields.io/github/stars/epicsagas?affiliations=OWNER&style=for-the-badge&logo=github&color=BB9AF7&label=STARS&labelColor=1A1B27" alt="stars">
+</p>
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="line" width="100%">
 ## 🚀 Featured
 
 <table>
 <tr>
-<td width="25%" valign="top">
-
-### [research-agent](https://github.com/epicsagas/research-agent)
-`Rust`
-
-Research memory for AI agents. arXiv/OpenAlex papers → SQLite with full-text search, LLM gap analysis, survey reports. Rust CLI + 18-tool MCP server; ships as a 5-host plugin.
-
-[![Crates.io](https://img.shields.io/crates/d/research-agent?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/research-agent) [![Stars](https://img.shields.io/github/stars/epicsagas/research-agent?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent) [![Release](https://img.shields.io/github/v/release/epicsagas/research-agent?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent/releases)
-
-</td>
-<td width="25%" valign="top">
-
-### [epic-harness](https://github.com/epicsagas/epic-harness)
-`Rust`
-
-Multi-tool AI agent harness — 22 skills, self-evolving engine, unified memory, autonomous spec-to-PR pipeline. Works with Claude Code, Codex, Cursor, OpenCode, and Cline.
-
-[![Crates.io](https://img.shields.io/crates/d/epic-harness?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/epic-harness) [![Stars](https://img.shields.io/github/stars/epicsagas/epic-harness?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness) [![Release](https://img.shields.io/github/v/release/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness/releases)
-
-</td>
-<td width="25%" valign="top">
-
-### [alcove](https://github.com/epicsagas/alcove)
-`Rust`
-
-MCP doc server for AI agents — BM25 + vector hybrid search over private project docs, tree-sitter code indexing, policy enforcement for doc consistency.
-
-[![Crates.io](https://img.shields.io/crates/d/alcove?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/alcove) [![Stars](https://img.shields.io/github/stars/epicsagas/alcove?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove) [![Release](https://img.shields.io/github/v/release/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove/releases)
-
-</td>
-<td width="25%" valign="top">
-
-### [Velith](https://github.com/epicsagas/Velith)
-`Plugin`
-
-AI-native publishing system — build books like software. 6-phase pipeline from blank page to EPUB/PDF, with 16 skills, 7 agents, and 8 genre templates.
-
-[![Stars](https://img.shields.io/github/stars/epicsagas/Velith?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith) [![Release](https://img.shields.io/github/v/release/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith/releases)
-
-</td>
+<td width="50%"><a href="https://github.com/epicsagas/research-agent"><img src="https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=research-agent&theme=tokyonight&hide_border=true" alt="research-agent"></a></td>
+<td width="50%"><a href="https://github.com/epicsagas/epic-harness"><img src="https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=epic-harness&theme=tokyonight&hide_border=true" alt="epic-harness"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://github.com/epicsagas/alcove"><img src="https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=alcove&theme=tokyonight&hide_border=true" alt="alcove"></a></td>
+<td width="50%"><a href="https://github.com/epicsagas/Velith"><img src="https://github-readme-stats.vercel.app/api/pin/?username=epicsagas&repo=Velith&theme=tokyonight&hide_border=true" alt="Velith"></a></td>
 </tr>
 </table>
+<p align="center"><sub>🔬 research-agent · 🔧 epic-harness · 📚 alcove · 📖 Velith — 디테일은 각 저장소 README에서</sub></p>
 
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="line" width="100%">
+## 🌐 Research Hubs
 
 ## 🌐 Research Hubs
 
@@ -116,6 +84,17 @@ Plugin marketplace — discover and install skills, commands, and agent configur
 </tr>
 </table>
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake.svg">
+    <img src="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake.svg" alt="contribution snake">
+  
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="line" width="100%">
+## 🛠 Tech Stack
+
+
 ## 🧰 More Tools
 
 - **[llm-kernel](https://github.com/epicsagas/llm-kernel)** — Rust foundation library for AI-native apps: 16-provider catalog, LLM client, MCP server, ONNX embeddings
@@ -126,50 +105,29 @@ Plugin marketplace — discover and install skills, commands, and agent configur
 - **[obsidian-forge](https://github.com/epicsagas/obsidian-forge)** — Obsidian vault generator, automation daemon, graph strengthener
 - **[homebrew-tap](https://github.com/epicsagas/homebrew-tap)** — Homebrew tap for the CLI tools above
 
-<!-- GitHub 통계 -->
-## 📊 GitHub Stats
+## 📊 Stats
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=tokyonight">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=github">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=tokyonight" alt="GitHub Stats">
-</picture>
+<table>
+<tr>
+<td width="33.3%"><img src="https://github-readme-stats.vercel.app/api?username=epicsagas&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" alt="stats"></td>
+<td width="33.3%"><img src="https://streak-stats.demolab.com?user=epicsagas&theme=tokyonight&hide_border=true&locale=ko" alt="streak"></td>
+<td width="33.3%"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=epicsagas&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" alt="langs"></td>
+</tr>
+</table>
 
-
-<!-- 기여 스네이크 (GitHub Actions 주 1회 갱신) -->
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake.svg">
-    <img src="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake.svg" alt="contribution snake">
-  </picture>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=epicsagas&theme=tokyo-night&hide_border=true&bg_color=1A1B27&color=A9B1D6&line=7AA2F7&point=E0AF68&area=true&area_color=24183B" alt="activity">
 </p>
 
-<!-- 주 사용 언어 (private 포함, GitHub Actions 생성) -->
+[![trophy](https://github-trophies.vercel.app/?username=epicsagas&theme=radical&row=1&column=10&no-bg=true&no-frame=true&margin-w=6)](https://github.com/ryo-ma/github-profile-trophy)
+## 🧩 Agent Skills
 
-![Top Languages](./metrics-languages.svg)
+Personal agent skill collection for AI coding agents — problem discovery, cognitive self-analysis, corrective routines, and OSS distribution readiness.
 
-<!-- OpenSSF Criticality Score top 5 (GitHub Actions, weekly) -->
-**🛡️ OSS Criticality Top 5** → [Full ranking](./criticality/README.md)
+→ **Full catalog & install guide:** [skills/README.md](skills/README.md)
 
-<!-- 연속 기여 -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=epicsagas&theme=tokyonight&hide_border=true&background=00000000&ring=C9462B&fire=E8533F&currStreakLabel=C9462B">
-  <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=epicsagas&theme=default&hide_border=true">
-  <img src="https://streak-stats.demolab.com/?user=epicsagas&theme=tokyonight&hide_border=true" alt="GitHub Streak">
-</picture>
+<!-- 현재 작업 중인 것 -->
 
-<!-- 트로피 -->
-## 🏆 Achievements
-
-[![trophy](https://github-trophies.vercel.app/?username=epicsagas&theme=onedark&row=1&column=7&no-bg=true&no-frame=true&margin-w=8)](https://github.com/ryo-ma/github-profile-trophy)
-
-<!-- 활동 그래프 -->
-## 📈 Activity
-
-[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=epicsagas&theme=tokyo-night&hide_border=true&bg_color=00000000&color=C9462B&line=E8533F&point=C9462B&area=true)](https://github.com/Ashutosh00710/github-readme-activity-graph)
-
-<!-- 연락처 / 링크 -->
 ## 🔗 Links
 
 ![Profile views](https://komarev.com/ghpvc/?username=epicsagas&style=for-the-badge&color=C9462B&label=PROFILE+VIEWS)
