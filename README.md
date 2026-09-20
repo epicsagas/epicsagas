@@ -19,23 +19,107 @@ Personal agent skill collection for AI coding agents — problem discovery, cogn
 → **Full catalog & install guide:** [skills/README.md](skills/README.md)
 
 <!-- 현재 작업 중인 것 -->
-## 🚀 What I'm Building
 
-- 🔬 **research-agent** — Research memory for AI agents: arXiv/OpenAlex → SQLite, LLM gap analysis, survey reports. Rust CLI + 18-tool MCP server
-- 🔧 **epic-harness** — Central AI agent harness, 30+ commands → 6, self-evolving skills
-- 📚 **alcove** — Private doc server with MCP tools for AI agents
-- 🧠 **Episteme** — Software engineering knowledge graph (patterns, laws, smells)
-- 🔄 **claudy** — Multi-provider AI launcher (Anthropic, Gemini, OpenRouter, Ollama)
-- 📄 **llm-transpile** — Token-optimized document transpiler
-- 🏠 **obsidian-forge** — Obsidian vault automation and graph strengthener
-- 📖 **Velith** — AI-native book publishing plugin with Claude Code, Codex, Antigravity, etc
-- ⚙️ **llm-kernel** — Foundation library for Rust AI-native apps (LLM client, MCP, embeddings, search)
-- 🌉 **opencodex** — Universal provider proxy for OpenAI Codex & Claude Code — any LLM behind one CLI
+## 🚀 Featured
 
-<!-- 기술 스택 -->
-## 🛠 Tech Stack
+<table>
+<tr>
+<td width="25%" valign="top">
 
-[![My Skills](https://skillicons.dev/icons?i=rust,go,ts,flutter,dart,python,aws,gcp,docker,kubernetes,svelte,linux&perline=6)](https://skillicons.dev)
+### [research-agent](https://github.com/epicsagas/research-agent)
+`Rust`
+
+Research memory for AI agents. arXiv/OpenAlex papers → SQLite with full-text search, LLM gap analysis, survey reports. Rust CLI + 18-tool MCP server; ships as a 5-host plugin.
+
+[![Crates.io](https://img.shields.io/crates/d/research-agent?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/research-agent) [![Stars](https://img.shields.io/github/stars/epicsagas/research-agent?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent) [![Release](https://img.shields.io/github/v/release/epicsagas/research-agent?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent/releases)
+
+</td>
+<td width="25%" valign="top">
+
+### [epic-harness](https://github.com/epicsagas/epic-harness)
+`Rust`
+
+Multi-tool AI agent harness — 22 skills, self-evolving engine, unified memory, autonomous spec-to-PR pipeline. Works with Claude Code, Codex, Cursor, OpenCode, and Cline.
+
+[![Crates.io](https://img.shields.io/crates/d/epic-harness?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/epic-harness) [![Stars](https://img.shields.io/github/stars/epicsagas/epic-harness?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness) [![Release](https://img.shields.io/github/v/release/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness/releases)
+
+</td>
+<td width="25%" valign="top">
+
+### [alcove](https://github.com/epicsagas/alcove)
+`Rust`
+
+MCP doc server for AI agents — BM25 + vector hybrid search over private project docs, tree-sitter code indexing, policy enforcement for doc consistency.
+
+[![Crates.io](https://img.shields.io/crates/d/alcove?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/alcove) [![Stars](https://img.shields.io/github/stars/epicsagas/alcove?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove) [![Release](https://img.shields.io/github/v/release/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove/releases)
+
+</td>
+<td width="25%" valign="top">
+
+### [Velith](https://github.com/epicsagas/Velith)
+`Plugin`
+
+AI-native publishing system — build books like software. 6-phase pipeline from blank page to EPUB/PDF, with 16 skills, 7 agents, and 8 genre templates.
+
+[![Stars](https://img.shields.io/github/stars/epicsagas/Velith?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith) [![Release](https://img.shields.io/github/v/release/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith/releases)
+
+</td>
+</tr>
+</table>
+
+
+## 🌐 Research Hubs
+
+<table>
+<tr>
+<td width="25%" valign="top">
+
+**[The Ontology Lineage](https://epicsagas.github.io/ontology-explorer/en/)**
+
+2,300 years of ontology research, 425 papers, one static page.
+
+`English · 한국어`
+
+</td>
+<td width="25%" valign="top">
+
+**[The Uncanny Valley of AI Writing](https://epicsagas.github.io/uncanny-writing/)**
+
+Fact-checked dossier on reader aversion to AI text — 86 papers, 4 open gaps.
+
+`한국어 · English`
+
+</td>
+<td width="25%" valign="top">
+
+**[epicsagas.github.io](https://epicsagas.github.io/)**
+
+Hub page linking every published research site and the tooling behind them.
+
+`English`
+
+</td>
+<td width="25%" valign="top">
+
+**[Claude Code plugins](https://github.com/epicsagas/plugins)**
+
+Plugin marketplace — discover and install skills, commands, and agent configurations.
+
+`GitHub`
+
+</td>
+</tr>
+</table>
+
+## 🧰 More Tools
+
+- **[llm-kernel](https://github.com/epicsagas/llm-kernel)** — Rust foundation library for AI-native apps: 16-provider catalog, LLM client, MCP server, ONNX embeddings
+- **[opencodex](https://github.com/epicsagas/opencodex)** — Universal provider proxy for OpenAI Codex & Claude Code — any LLM behind one CLI
+- **[claudy](https://github.com/epicsagas/claudy)** — Multi-provider AI launcher (Anthropic, Gemini, OpenRouter, Ollama)
+- **[Episteme](https://github.com/epicsagas/Episteme)** — Software engineering knowledge graph: patterns, laws, refactorings, smells
+- **[llm-transpile](https://github.com/epicsagas/llm-transpile)** — Raw docs → structured bridge format with adaptive token compression
+- **[obsidian-forge](https://github.com/epicsagas/obsidian-forge)** — Obsidian vault generator, automation daemon, graph strengthener
+- **[homebrew-tap](https://github.com/epicsagas/homebrew-tap)** — Homebrew tap for the CLI tools above
 
 <!-- GitHub 통계 -->
 ## 📊 GitHub Stats
@@ -69,156 +153,6 @@ Personal agent skill collection for AI coding agents — problem discovery, cogn
 ## 📈 Activity
 
 [![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=epicsagas&theme=tokyo-night&hide_border=true&bg_color=00000000&color=C9462B&line=E8533F&point=C9462B&area=true)](https://github.com/Ashutosh00710/github-readme-activity-graph)
-
-<!-- 프로젝트 카드 -->
-## 📦 Projects
-
-<table>
-<tr>
-<td width="50%">
-
-### [alcove](https://github.com/epicsagas/alcove)
-Private doc server with MCP tools — serves internal docs to AI agents without context bloat.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/alcove?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/alcove)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/alcove?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/alcove)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/alcove?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/alcove/releases)
-
-</td>
-<td width="50%">
-
-### [epic-harness](https://github.com/epicsagas/epic-harness)
-Central AI agent harness — 30+ commands → 6, auto-triggered skills, self-evolving from failures.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/epic-harness?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/epic-harness)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/epic-harness?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/epic-harness)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/epic-harness?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/epic-harness/releases)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### [Episteme](https://github.com/epicsagas/Episteme)
-Software engineering knowledge graph — design patterns, refactorings, laws, and code smells.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/episteme?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/episteme)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/Episteme?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Episteme)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/Episteme?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/Episteme)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/Episteme?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Episteme/releases)
-
-</td>
-<td width="50%">
-
-### [claudy](https://github.com/epicsagas/claudy)
-Multi-provider AI launcher — Anthropic, Gemini, OpenRouter, Ollama from one CLI.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/claudy?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/claudy)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/claudy?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/claudy)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/claudy?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/claudy)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/claudy?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/claudy/releases)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### [llm-transpile](https://github.com/epicsagas/llm-transpile)
-Token-optimized document transpiler — raw docs → structured bridge format with adaptive compression.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/llm-transpile?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/llm-transpile)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/llm-transpile?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-transpile)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/llm-transpile?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/llm-transpile)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/llm-transpile?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-transpile/releases)
-
-</td>
-<td width="50%">
-
-### [obsidian-forge](https://github.com/epicsagas/obsidian-forge)
-Obsidian vault generator, automation daemon, and knowledge graph strengthener.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/obsidian-forge?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/obsidian-forge)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/obsidian-forge?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/obsidian-forge)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/obsidian-forge?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/obsidian-forge/releases)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### [Velith](https://github.com/epicsagas/Velith)
-AI-native book publishing plugin — 6-phase pipeline from ideation to EPUB/PDF, for Claude Code and Codex CLI.
-
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/Velith?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/Velith)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/Velith?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/Velith/releases)
-
-</td>
-<td width="50%">
-
-### [llm-kernel](https://github.com/epicsagas/llm-kernel)
-Foundation library for Rust AI-native apps — provider catalog, LLM client, MCP server, search, telemetry, and safety.
-
-[![Crates.io Downloads](https://img.shields.io/crates/d/llm-kernel?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/llm-kernel)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/llm-kernel?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-kernel)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/llm-kernel?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/llm-kernel)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/llm-kernel?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/llm-kernel/releases)
-
-</td>
-</tr>
-
-<tr>
-<td width="50%">
-
-
-### [research-agent](https://github.com/epicsagas/research-agent)
-Research memory for AI agents — index arXiv/OpenAlex papers into SQLite, find coverage gaps, file survey reports. Also a 5-host plugin.
-[![Crates.io Downloads](https://img.shields.io/crates/d/research-agent?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/research-agent)
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/research-agent?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/research-agent?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/research-agent)
-[![Latest Release](https://img.shields.io/github/v/release/epicsagas/research-agent?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent/releases)
-
-
-</td>
-<td width="50%">
-
-
-### [opencodex](https://github.com/epicsagas/opencodex)
-Universal provider proxy for OpenAI Codex & Claude Code — use any LLM (Claude, Gemini, Grok, DeepSeek, Ollama) with one CLI.
-[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/opencodex?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/opencodex)
-[![Language](https://img.shields.io/github/languages/top/epicsagas/opencodex?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/opencodex)
-
-
-</td>
-</tr>
-</table>
-
-<!-- 리서치 사이트 -->
-## 🌐 Research Sites
-
-Long-form, fact-checked research dossiers published as static pages — collected and gap-analyzed with research-agent.
-
-<table>
-<tr>
-<td width="50%">
-
-### [The Ontology Lineage](https://epicsagas.github.io/ontology-explorer/en/)
-2,300 years of ontology research on one static page — lineage timeline, integrated architecture, five-stage learning route, browser for all 425 papers. (한국어 · English)
-
-</td>
-<td width="50%">
-
-### [The Uncanny Valley of AI Writing](https://epicsagas.github.io/uncanny-writing/)
-Fact-checked dossier on why readers turn away from AI-generated text — 5 sources verified, 86 papers indexed, 4 open gaps. (한국어 · English)
-
-</td>
-</tr>
-</table>
-
-→ Hub: [epicsagas.github.io](https://epicsagas.github.io/)
 
 <!-- 연락처 / 링크 -->
 ## 🔗 Links
