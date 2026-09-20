@@ -21,6 +21,7 @@ Personal agent skill collection for AI coding agents — problem discovery, cogn
 <!-- 현재 작업 중인 것 -->
 ## 🚀 What I'm Building
 
+- 🔬 **research-agent** — Research memory for AI agents: arXiv/OpenAlex → SQLite, LLM gap analysis, survey reports. Rust CLI + 18-tool MCP server
 - 🔧 **epic-harness** — Central AI agent harness, 30+ commands → 6, self-evolving skills
 - 📚 **alcove** — Private doc server with MCP tools for AI agents
 - 🧠 **Episteme** — Software engineering knowledge graph (patterns, laws, smells)
@@ -29,6 +30,7 @@ Personal agent skill collection for AI coding agents — problem discovery, cogn
 - 🏠 **obsidian-forge** — Obsidian vault automation and graph strengthener
 - 📖 **Velith** — AI-native book publishing plugin with Claude Code, Codex, Antigravity, etc
 - ⚙️ **llm-kernel** — Foundation library for Rust AI-native apps (LLM client, MCP, embeddings, search)
+- 🌉 **opencodex** — Universal provider proxy for OpenAI Codex & Claude Code — any LLM behind one CLI
 
 <!-- 기술 스택 -->
 ## 🛠 Tech Stack
@@ -167,7 +169,56 @@ Foundation library for Rust AI-native apps — provider catalog, LLM client, MCP
 
 </td>
 </tr>
+
+<tr>
+<td width="50%">
+
+
+### [research-agent](https://github.com/epicsagas/research-agent)
+Research memory for AI agents — index arXiv/OpenAlex papers into SQLite, find coverage gaps, file survey reports. Also a 5-host plugin.
+[![Crates.io Downloads](https://img.shields.io/crates/d/research-agent?style=flat-square&logo=rust&labelColor=1A1B27&color=E8533F)](https://crates.io/crates/research-agent)
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/research-agent?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/research-agent?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/research-agent)
+[![Latest Release](https://img.shields.io/github/v/release/epicsagas/research-agent?style=flat-square&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/research-agent/releases)
+
+
+</td>
+<td width="50%">
+
+
+### [opencodex](https://github.com/epicsagas/opencodex)
+Universal provider proxy for OpenAI Codex & Claude Code — use any LLM (Claude, Gemini, Grok, DeepSeek, Ollama) with one CLI.
+[![GitHub Stars](https://img.shields.io/github/stars/epicsagas/opencodex?style=flat-square&logo=github&labelColor=1A1B27&color=C9462B)](https://github.com/epicsagas/opencodex)
+[![Language](https://img.shields.io/github/languages/top/epicsagas/opencodex?style=flat-square&labelColor=1A1B27&color=E8533F)](https://github.com/epicsagas/opencodex)
+
+
+</td>
+</tr>
 </table>
+
+<!-- 리서치 사이트 -->
+## 🌐 Research Sites
+
+Long-form, fact-checked research dossiers published as static pages — collected and gap-analyzed with research-agent.
+
+<table>
+<tr>
+<td width="50%">
+
+### [The Ontology Lineage](https://epicsagas.github.io/ontology-explorer/en/)
+2,300 years of ontology research on one static page — lineage timeline, integrated architecture, five-stage learning route, browser for all 425 papers. (한국어 · English)
+
+</td>
+<td width="50%">
+
+### [The Uncanny Valley of AI Writing](https://epicsagas.github.io/uncanny-writing/)
+Fact-checked dossier on why readers turn away from AI-generated text — 5 sources verified, 86 papers indexed, 4 open gaps. (한국어 · English)
+
+</td>
+</tr>
+</table>
+
+→ Hub: [epicsagas.github.io](https://epicsagas.github.io/)
 
 <!-- 연락처 / 링크 -->
 ## 🔗 Links
