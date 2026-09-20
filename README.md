@@ -2,6 +2,11 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:1A1B27,50:C9462B,100:E8533F&height=300&section=header&text=epicsagas&fontSize=80&fontColor=FFFFFF&animation=fadeIn&fontAlignY=35&desc=Software%20Engineer%20%7C%20Platform%20and%20Infra&descSize=20&descAlignY=55)
 
 <!-- About Me -->
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2800&pause=1000&color=C9462B&center=true&vCenter=true&width=640&lines=Building+AI+agent+infrastructure+in+Rust;MCP+servers+%C2%B7+harnesses+%C2%B7+research+tools;Papers+in%2C+fact-checked+dossiers+out;Seoul%2C+Korea" alt="typing">
+</p>
+
 ## 👋 About
 
 Software Engineer building **platform & infrastructure** tools.
@@ -130,6 +135,16 @@ Plugin marketplace — discover and install skills, commands, and agent configur
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=epicsagas&theme=tokyonight" alt="GitHub Stats">
 </picture>
 
+
+<!-- 기여 스네이크 (GitHub Actions 주 1회 갱신) -->
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake.svg">
+    <img src="https://raw.githubusercontent.com/epicsagas/epicsagas/output/github-contribution-grid-snake.svg" alt="contribution snake">
+  </picture>
+</p>
+
 <!-- 주 사용 언어 (private 포함, GitHub Actions 생성) -->
 
 ![Top Languages](./metrics-languages.svg)
@@ -156,6 +171,9 @@ Plugin marketplace — discover and install skills, commands, and agent configur
 
 <!-- 연락처 / 링크 -->
 ## 🔗 Links
+
+![Profile views](https://komarev.com/ghpvc/?username=epicsagas&style=for-the-badge&color=C9462B&label=PROFILE+VIEWS)
+
 
 [![Website](https://img.shields.io/badge/Website-epiccounty.com-C9462B?style=for-the-badge&logo=google-chrome&logoColor=white)](https://epiccounty.com)
 [![GitHub](https://img.shields.io/badge/GitHub-epicsagas-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/epicsagas)
